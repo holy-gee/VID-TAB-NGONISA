@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Ngonisa Video App - No Sign In</title>
+<title>Ngonisa Video App (Firestore)</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -31,6 +31,7 @@
     <option value="Music">Music</option>
     <option value="Gaming">Gaming</option>
     <option value="Education">Education</option>
+    <option value="Kids">Kids</option>
   </select><br /><br />
   <button id="upload-btn">Upload Video</button>
 </section>
@@ -38,10 +39,17 @@
 <section id="search-section">
   <input type="text" id="search-input" placeholder="Search videos..." />
   <button id="search-btn">Search</button>
+  <select id="category-filter">
+    <option value="All">Filter by category</option>
+    <option value="Music">Music</option>
+    <option value="Gaming">Gaming</option>
+    <option value="Education">Education</option>
+    <option value="Kids">Kids</option>
+  </select>
 </section>
 
 <main id="videos-container"></main>
 
-<script src="app.js"></script>
+<script type="module" src="app.js"></script>
 </body>
 </html>
