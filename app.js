@@ -9,6 +9,7 @@ import {
   updateDoc,
   doc,
   where,
+  deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -22,6 +23,7 @@ const firebaseConfig = {
 };
 
 const PASSWORD = "dhogotheboss";
+const DELETE_ALLOWED_USERNAME = "Takunda";
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -57,7 +59,8 @@ loginBtn.onclick = () => {
     loginSection.style.display = "none";
     uploadSection.style.display = "flex";
     uploaderInfo.style.display = "block";
-    currentUploader = "";
+    currentUploader = ""; // reset uploader username
+    uploaderNameSpan.textContent = "";
   } else {
     alert("Wrong password!");
   }
@@ -70,6 +73,8 @@ logoutBtn.onclick = () => {
   uploaderInfo.style.display = "none";
   loginSection.style.display = "flex";
   currentUploader = "";
+  uploaderNameSpan.textContent = "";
+  loadAndRenderVideos();
 };
 
 // Upload video button event
@@ -224,11 +229,9 @@ function createVideoCard(video) {
   category.textContent = "Category: " + video.category;
   div.appendChild(category);
 
-  // Controls container
   const controls = document.createElement("div");
   controls.className = "video-controls";
 
-  // Like button
   const likeBtn = document.createElement("button");
   likeBtn.className = "like-btn";
   likeBtn.textContent = `Like (${video.likesCount || 0})`;
@@ -237,7 +240,7 @@ function createVideoCard(video) {
     likeBtn.textContent = `Like (${newCount})`;
     try {
       await updateDoc(doc(db, "videos", video.id), { likesCount: newCount });
-      video.likesCount = newCount; // update local
+      video.likesCount = newCount;
     } catch (err) {
       console.error("Failed to update likes:", err);
       alert("Failed to like video.");
@@ -245,7 +248,6 @@ function createVideoCard(video) {
   };
   controls.appendChild(likeBtn);
 
-  // Download button for direct links only (not embedded YouTube)
   if (
     !video.videoUrl.includes("youtube.com") &&
     !video.videoUrl.includes("youtu.be") &&
@@ -258,6 +260,25 @@ function createVideoCard(video) {
     downloadBtn.textContent = "Download";
     downloadBtn.target = "_blank";
     controls.appendChild(downloadBtn);
+  }
+
+  // Show delete button only if loggedIn and currentUploader username is "Takunda"
+  if (loggedIn && currentUploader === DELETE_ALLOWED_USERNAME) {
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "delete-btn";
+    deleteBtn.textContent = "Delete";
+    deleteBtn.onclick = async () => {
+      if (!confirm("Are you sure you want to delete this video?")) return;
+      try {
+        await deleteDoc(doc(db, "videos", video.id));
+        alert("Video deleted!");
+        await loadAndRenderVideos(searchInput.value.trim(), categoryFilter.value);
+      } catch (err) {
+        console.error("Failed to delete video:", err);
+        alert("Failed to delete video.");
+      }
+    };
+    controls.appendChild(deleteBtn);
   }
 
   div.appendChild(controls);
