@@ -59,8 +59,12 @@ loginBtn.onclick = () => {
     loginSection.style.display = "none";
     uploadSection.style.display = "flex";
     uploaderInfo.style.display = "block";
-    currentUploader = ""; // reset uploader username
-    uploaderNameSpan.textContent = "";
+
+    // Set currentUploader here for delete button logic:
+    currentUploader = DELETE_ALLOWED_USERNAME;
+
+    uploaderNameSpan.textContent = currentUploader;
+    loadAndRenderVideos(searchInput.value.trim(), categoryFilter.value);
   } else {
     alert("Wrong password!");
   }
@@ -94,9 +98,6 @@ uploadBtn.onclick = async () => {
     return;
   }
 
-  currentUploader = username;
-  uploaderNameSpan.textContent = username;
-
   try {
     await addDoc(collection(db, "videos"), {
       username,
@@ -116,7 +117,7 @@ uploadBtn.onclick = async () => {
     videoCategorySelect.value = "All";
 
     alert("Video uploaded successfully!");
-    await loadAndRenderVideos();
+    await loadAndRenderVideos(searchInput.value.trim(), categoryFilter.value);
   } catch (err) {
     console.error("Error uploading video:", err);
     alert("Failed to upload video.");
@@ -262,7 +263,7 @@ function createVideoCard(video) {
     controls.appendChild(downloadBtn);
   }
 
-  // Show delete button only if loggedIn and currentUploader username is "Takunda"
+  // Show delete button only if loggedIn and currentUploader is "Takunda"
   if (loggedIn && currentUploader === DELETE_ALLOWED_USERNAME) {
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "delete-btn";
