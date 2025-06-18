@@ -1,126 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ngonisa Family Productions</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ngonisa Video App - No Sign In</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header>
-    <h1>Ngonisa Family Productions</h1>
-    <div id="auth-area">
-      <button id="sign-in-btn">Sign In with Google</button>
-      <div id="user-info" class="hidden">
-        <img id="user-pic" alt="Profile" />
-        <span id="user-name"></span>
-        <button id="sign-out-btn">Sign Out</button>
-      </div>
-    </div>
-  </header>
+<header>
+  <h1>Ngonisa Video App</h1>
+  <div id="login-section">
+    <input type="password" id="upload-password" placeholder="Enter password to upload" />
+    <button id="login-btn">Enter</button>
+  </div>
+  <div id="uploader-info" style="display:none;">
+    Upload enabled for: <span id="uploader-name"></span>
+    <button id="logout-btn">Logout</button>
+  </div>
+</header>
 
-  <nav>
-    <button class="nav-btn" data-page="home" id="nav-home">Home</button>
-    <button class="nav-btn" data-page="shorts" id="nav-shorts">Shorts &lt;1min</button>
-    <button class="nav-btn" data-page="upload" id="nav-upload">Upload Video</button>
-    <button class="nav-btn" data-page="dashboard" id="nav-dashboard">My Dashboard</button>
-  </nav>
+<section id="upload-section" style="display:none;">
+  <h2>Upload Video</h2>
+  <input type="text" id="username-input" placeholder="Your username" /><br /><br />
+  <input type="text" id="video-url" placeholder="Video URL (YouTube or direct link)" /><br /><br />
+  <input type="text" id="thumbnail-url" placeholder="Thumbnail image URL (optional)" /><br /><br />
+  <input type="text" id="video-title" placeholder="Video Title" /><br /><br />
+  <select id="video-category">
+    <option value="All">All</option>
+    <option value="Music">Music</option>
+    <option value="Gaming">Gaming</option>
+    <option value="Education">Education</option>
+  </select><br /><br />
+  <button id="upload-btn">Upload Video</button>
+</section>
 
-  <main>
-    <!-- Home Page -->
-    <section id="page-home" class="page active">
-      <div class="search-bar">
-        <input type="text" id="search-input" placeholder="Search videos..." />
-        <button id="search-btn">Search</button>
-      </div>
-      <div id="videos-list" class="videos-list"></div>
-    </section>
+<section id="search-section">
+  <input type="text" id="search-input" placeholder="Search videos..." />
+  <button id="search-btn">Search</button>
+</section>
 
-    <!-- Shorts Page -->
-    <section id="page-shorts" class="page">
-      <h2>Short Videos (&lt;1min)</h2>
-      <div id="shorts-list" class="videos-list"></div>
-    </section>
+<main id="videos-container"></main>
 
-    <!-- Upload Page -->
-    <section id="page-upload" class="page">
-      <h2>Upload Video</h2>
-      <form id="upload-form">
-        <label>
-          Video URL (YouTube or direct mp4):
-          <input type="url" id="video-url" required />
-        </label><br />
-        <label>
-          Thumbnail URL (optional for YouTube):
-          <input type="url" id="thumbnail-url" />
-        </label><br />
-        <label>
-          Description:
-          <input type="text" id="video-description" required maxlength="100" />
-        </label><br />
-        <label>
-          Category:
-          <select id="video-category" required>
-            <option value="">--Select Category--</option>
-            <option value="Music">Music</option>
-            <option value="Gaming">Gaming</option>
-            <option value="Education">Education</option>
-            <option value="Entertainment">Entertainment</option>
-            <option value="Other">Other</option>
-          </select>
-        </label><br />
-        <label>
-          Duration in seconds (for shorts detection):
-          <input type="number" id="video-duration" min="1" max="3600" required />
-        </label><br />
-        <button type="submit" id="upload-btn">Upload Video</button>
-      </form>
-    </section>
-
-    <!-- Dashboard Page -->
-    <section id="page-dashboard" class="page">
-      <h2>My Dashboard</h2>
-      <div id="user-stats">
-        <p>Likes Received: <span id="likes-count">0</span></p>
-        <p>Comments Received: <span id="comments-count">0</span></p>
-        <p>Subscribers: <span id="subscribers-count">0</span></p>
-      </div>
-      <h3>My Uploaded Videos</h3>
-      <div id="my-videos-list" class="videos-list"></div>
-      <h3>Saved Videos (Watch Later)</h3>
-      <div id="saved-videos-list" class="videos-list"></div>
-    </section>
-
-  </main>
-
-  <template id="video-card-template">
-    <div class="video-card">
-      <div class="video-thumb-container"></div>
-      <div class="video-info">
-        <h4 class="video-title"></h4>
-        <p class="video-description"></p>
-        <p>Uploader: <span class="video-uploader"></span></p>
-        <p>Category: <span class="video-category"></span></p>
-        <p>Likes: <span class="like-count">0</span>
-          <button class="like-btn">Like</button>
-        </p>
-        <p>Comments: <span class="comment-count">0</span>
-          <button class="comment-toggle-btn">Comments</button>
-        </p>
-        <button class="subscribe-btn">Subscribe</button>
-        <button class="save-btn">Save for Later</button>
-        <button class="delete-btn hidden">Delete</button>
-      </div>
-      <div class="comments-section hidden">
-        <div class="comments-list"></div>
-        <input type="text" class="comment-input" placeholder="Add a comment" />
-        <button class="comment-submit-btn">Submit</button>
-      </div>
-    </div>
-  </template>
-
-  <script type="module" src="app.js"></script>
-
+<script src="app.js"></script>
 </body>
 </html>
