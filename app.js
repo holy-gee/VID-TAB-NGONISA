@@ -302,4 +302,4 @@ categoryFilter.onchange = () => {
 };
 
 // Initial load
-loadAndRenderVideos();
+loadAndRenderVideos(); 
