@@ -1,309 +1,93 @@
-/* Reset */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* Body and general styles */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #121212;
-  color: #eee;
-  line-height: 1.5;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: white;
+  margin: 0;
+  padding: 0 1rem;
 }
 
-/* Header */
 header {
-  background-color: #d32f2f;
+  background-color: #c00;
   padding: 1rem;
-  text-align: center;
-  color: white;
-  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 header h1 {
-  font-weight: 700;
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-}
-
-/* Auth area */
-#auth-area {
-  margin-top: 0.5rem;
-}
-
-#sign-in-btn, #sign-out-btn {
-  background-color: #b71c1c;
-  border: none;
-  padding: 0.5rem 1rem;
-  color: white;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-}
-
-#sign-in-btn:hover, #sign-out-btn:hover {
-  background-color: #7f0000;
-}
-
-#user-info {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-#user-info.hidden {
-  display: none;
-}
-
-#user-pic {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
-}
-
-/* Navigation */
-nav {
-  display: flex;
-  justify-content: center;
-  background-color: #b71c1c;
-  gap: 1rem;
-  padding: 0.5rem 0;
-  user-select: none;
-}
-
-.nav-btn {
-  background: transparent;
-  border: 2px solid white;
-  color: white;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  border-radius: 25px;
-  font-weight: 600;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.nav-btn:hover, .nav-btn.active {
-  background-color: white;
-  color: #b71c1c;
-}
-
-/* Main content */
-main {
-  flex: 1;
-  padding: 1rem;
-  max-width: 900px;
-  margin: auto;
-}
-
-/* Pages */
-.page {
-  display: none;
-}
-
-.page.active {
-  display: block;
-}
-
-/* Search Bar */
-.search-bar {
-  display: flex;
-  margin-bottom: 1rem;
-}
-
-#search-input {
-  flex: 1;
-  padding: 0.5rem;
-  border-radius: 4px 0 0 4px;
-  border: 1px solid #555;
-  background-color: #222;
-  color: white;
-  outline: none;
-}
-
-#search-input::placeholder {
-  color: #999;
-}
-
-#search-btn {
-  padding: 0.5rem 1rem;
-  background-color: #d32f2f;
-  border: none;
-  color: white;
-  cursor: pointer;
-  border-radius: 0 4px 4px 0;
-  transition: background-color 0.3s;
-}
-
-#search-btn:hover {
-  background-color: #7f0000;
-}
-
-/* Videos list */
-.videos-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
-  gap: 1rem;
-}
-
-/* Video card */
-.video-card {
-  background-color: #222;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 0 8px rgba(255, 0, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-}
-
-.video-thumb-container {
-  width: 100%;
-  height: 160px;
-  background-color: #111;
-  overflow: hidden;
-}
-
-.video-thumb-container iframe,
-.video-thumb-container video,
-.video-thumb-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Video info */
-.video-info {
-  padding: 0.8rem 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  margin: 0;
   flex-grow: 1;
-  position: relative;
 }
 
-.video-info h4.video-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #ff4444;
-}
-
-.video-info p {
-  font-size: 0.85rem;
-  color: #ddd;
-}
-
-.video-info p span {
-  font-weight: 600;
-  color: white;
-}
-
-/* Buttons */
-.like-btn,
-.comment-toggle-btn,
-.subscribe-btn,
-.save-btn,
-.delete-btn,
-.comment-submit-btn {
-  margin-top: 0.3rem;
-  background-color: #d32f2f;
-  border: none;
-  color: white;
-  padding: 0.3rem 0.7rem;
-  font-size: 0.85rem;
-  border-radius: 25px;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s;
-}
-
-.like-btn:hover,
-.comment-toggle-btn:hover,
-.subscribe-btn:hover,
-.save-btn:hover,
-.delete-btn:hover,
-.comment-submit-btn:hover {
-  background-color: #7f0000;
-}
-
-/* Delete button hidden by default */
-.delete-btn.hidden {
-  display: none;
-}
-
-/* Comments section */
-.comments-section {
-  background-color: #333;
-  padding: 0.5rem 1rem;
-  margin-top: 0.5rem;
-  border-radius: 0 0 8px 8px;
-}
-
-.comments-section.hidden {
-  display: none;
-}
-
-.comments-list {
-  max-height: 120px;
-  overflow-y: auto;
-  margin-bottom: 0.5rem;
-  font-size: 0.85rem;
-  color: #ccc;
-  border-bottom: 1px solid #555;
-  padding-bottom: 0.5rem;
-}
-
-.comment-input {
-  width: 100%;
-  padding: 0.4rem;
-  border-radius: 4px;
-  border: 1px solid #555;
-  background-color: #222;
-  color: white;
-  font-size: 0.9rem;
-  outline: none;
-}
-
-.comment-input::placeholder {
-  color: #888;
-}
-
-/* Upload form */
-#upload-form label {
-  display: block;
-  margin-bottom: 0.7rem;
-  font-weight: 600;
-}
-
-#upload-form input,
-#upload-form select {
-  width: 100%;
+input, select, button {
   padding: 0.5rem;
+  margin: 0.3rem 0;
   border-radius: 4px;
-  border: 1px solid #555;
-  background-color: #222;
-  color: white;
-  outline: none;
+  border: none;
   font-size: 1rem;
 }
 
-/* Responsive tweaks */
-@media (max-width: 600px) {
-  nav {
-    flex-wrap: wrap;
-  }
+button {
+  background-color: #900;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-  .videos-list {
-    grid-template-columns: 1fr;
-  }
+button:hover {
+  background-color: #b00;
+}
 
-  .video-thumb-container {
-    height: 200px;
-  }
+#upload-section, #search-section {
+  margin: 1rem 0;
+}
+
+#videos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.video-card {
+  background-color: #222;
+  padding: 0.5rem;
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #c00;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-thumb {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.video-title {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: #ff4444;
+}
+
+.video-category {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.like-btn {
+  margin-top: 0.5rem;
+  background-color: #900;
+  border: none;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.like-btn:hover {
+  background-color: #b00;
 }
