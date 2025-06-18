@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NGONISA FAMILY PRODUCTIONS</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>NGONISA FAMILY PRODUCTIONS</h1>
+    <div class="search-bar">
+      <input type="text" id="search-box" placeholder="Search videos..." />
+      <button id="search-btn">Search</button>
+    </div>
+    <button id="show-upload-btn">Upload Video</button>
+  </header>
+
+  <section id="upload-section" class="hidden">
+    <h2>Upload Video (password required)</h2>
+    <input type="password" id="upload-password" placeholder="Enter password" />
+    <div id="upload-form" class="hidden">
+      <input type="text" id="uploader-name" placeholder="Your username" />
+      <input type="text" id="video-url" placeholder="Video Link (YouTube or MP4)" />
+      <textarea id="video-description" placeholder="Description"></textarea>
+      <input type="text" id="thumbnail-url" placeholder="Thumbnail Image Link (optional)" />
+      <button id="upload-btn">Submit Video</button>
+    </div>
+  </section>
+
+  <main id="video-feed"></main>
+
+  <template id="video-card-template">
+    <article class="video-card">
+      <img class="video-thumb" src="" alt="Thumbnail" />
+      <h3 class="video-title"></h3>
+      <p class="video-description"></p>
+      <p class="video-uploader"></p>
+      <div class="video-actions">
+        <button class="like-btn">❤️ <span class="like-count">0</span></button>
+        <button class="comment-btn">💬 Comments (<span class="comment-count">0</span>)</button>
+        <button class="play-btn">▶️ Play</button>
+      </div>
+      <section class="comments-section hidden">
+        <div class="comments-list"></div>
+        <input type="text" class="comment-input" placeholder="Write a comment..." />
+        <button class="comment-submit-btn">Post</button>
+      </section>
+    </article>
+  </template>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
