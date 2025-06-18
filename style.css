@@ -41,12 +41,30 @@ button:hover {
 
 #upload-section, #search-section {
   margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+#upload-section input, #upload-section select {
+  flex: 1 1 100%;
+}
+
+#search-section input {
+  flex: 1 1 60%;
+}
+
+#search-section button, #search-section select {
+  flex: 1 1 18%;
+  min-width: 120px;
 }
 
 #videos-container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .video-card {
@@ -78,16 +96,28 @@ button:hover {
   color: #aaa;
 }
 
-.like-btn {
+.video-uploader {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.video-controls {
   margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.like-btn, .download-btn {
   background-color: #900;
   border: none;
   color: white;
   padding: 0.3rem 0.8rem;
   cursor: pointer;
   border-radius: 4px;
+  font-size: 0.9rem;
 }
 
-.like-btn:hover {
+.like-btn:hover, .download-btn:hover {
   background-color: #b00;
 }
