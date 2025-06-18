@@ -108,7 +108,7 @@ button:hover {
   align-items: center;
 }
 
-.like-btn, .download-btn {
+.like-btn, .download-btn, .delete-btn {
   background-color: #900;
   border: none;
   color: white;
@@ -116,8 +116,17 @@ button:hover {
   cursor: pointer;
   border-radius: 4px;
   font-size: 0.9rem;
+  margin-left: 0.3rem;
 }
 
 .like-btn:hover, .download-btn:hover {
   background-color: #b00;
+}
+
+.delete-btn {
+  background-color: #b00;
+}
+
+.delete-btn:hover {
+  background-color: #e00;
 }
