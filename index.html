@@ -13,6 +13,15 @@
       <input type="text" id="search-box" placeholder="Search videos..." />
       <button id="search-btn">Search</button>
     </div>
+    <div class="category-filter">
+      <select id="category-select">
+        <option value="">All Categories</option>
+        <option value="Music">Music</option>
+        <option value="Education">Education</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Gaming">Gaming</option>
+      </select>
+    </div>
     <button id="show-upload-btn">Upload Video</button>
   </header>
 
@@ -24,6 +33,13 @@
       <input type="text" id="video-url" placeholder="Video Link (YouTube or MP4)" />
       <textarea id="video-description" placeholder="Description"></textarea>
       <input type="text" id="thumbnail-url" placeholder="Thumbnail Image Link (optional)" />
+      <select id="video-category">
+        <option value="">Select Category</option>
+        <option value="Music">Music</option>
+        <option value="Education">Education</option>
+        <option value="Entertainment">Entertainment</option>
+        <option value="Gaming">Gaming</option>
+      </select>
       <button id="upload-btn">Submit Video</button>
     </div>
   </section>
@@ -32,14 +48,14 @@
 
   <template id="video-card-template">
     <article class="video-card">
-      <img class="video-thumb" src="" alt="Thumbnail" />
+      <div class="video-display"></div>
       <h3 class="video-title"></h3>
       <p class="video-description"></p>
       <p class="video-uploader"></p>
       <div class="video-actions">
         <button class="like-btn">❤️ <span class="like-count">0</span></button>
         <button class="comment-btn">💬 Comments (<span class="comment-count">0</span>)</button>
-        <button class="play-btn">▶️ Play</button>
+        <a class="download-btn" href="#" download target="_blank">⬇️ Download</a>
       </div>
       <section class="comments-section hidden">
         <div class="comments-list"></div>
