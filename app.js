@@ -11,9 +11,10 @@ import {
   getDocs,
   increment,
   where,
+  deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Your Firebase config (replace with your own if needed)
+// Your Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyBPdGAZT_U8xNBsU-S4NnC7WUQI8zM1LWI",
   authDomain: "vidfind-77a6a.firebaseapp.com",
@@ -24,11 +25,9 @@ const firebaseConfig = {
   measurementId: "G-N4NTHY2230",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// DOM Elements
 const videoFeed = document.getElementById("video-feed");
 const searchBox = document.getElementById("search-box");
 const searchBtn = document.getElementById("search-btn");
@@ -47,6 +46,9 @@ const videoCardTemplate = document.getElementById("video-card-template");
 
 let allVideos = [];
 
+// Ask for current username for delete permission
+const currentUser = prompt("Enter your username (for delete permission):") || "";
+
 // Show upload form with password
 showUploadBtn.addEventListener("click", () => {
   uploadSection.classList.remove("hidden");
@@ -61,7 +63,6 @@ uploadPasswordInput.addEventListener("keyup", () => {
   }
 });
 
-// Utility: Extract YouTube video ID from URL
 function getYouTubeID(url) {
   const regExp =
     /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|watch\?.+&v=)([^#&?]*).*/;
@@ -69,7 +70,6 @@ function getYouTubeID(url) {
   return match && match[2].length === 11 ? match[2] : null;
 }
 
-// Render videos
 function renderVideos(videos) {
   videoFeed.innerHTML = "";
   if (videos.length === 0) {
@@ -91,6 +91,7 @@ function renderVideos(videos) {
     const commentInput = clone.querySelector(".comment-input");
     const commentSubmitBtn = clone.querySelector(".comment-submit-btn");
     const downloadBtn = clone.querySelector(".download-btn");
+    const videoActions = clone.querySelector(".video-actions");
 
     // Setup video player
     const ytID = getYouTubeID(video.videoUrl);
@@ -161,11 +162,29 @@ function renderVideos(videos) {
       }
     });
 
+    // Add Delete button if uploader matches currentUser
+    if (video.uploader === currentUser) {
+      const deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.style.background = "#800";
+      deleteBtn.style.marginLeft = "auto";
+      deleteBtn.addEventListener("click", async () => {
+        if (confirm("Are you sure you want to delete this video?")) {
+          try {
+            await deleteDoc(doc(db, "videos", video.id));
+            alert("Video deleted!");
+          } catch (err) {
+            alert("Delete failed: " + err.message);
+          }
+        }
+      });
+      videoActions.appendChild(deleteBtn);
+    }
+
     videoFeed.appendChild(clone);
   });
 }
 
-// Load comments for a video
 async function loadComments(videoId, container, countSpan) {
   const commentsCol = collection(db, "videos", videoId, "comments");
   const commentsSnap = await getDocs(query(commentsCol, orderBy("createdAt", "desc")));
@@ -215,17 +234,14 @@ async function fetchVideos(searchTerm = "", category = "") {
   });
 }
 
-// Search button
 searchBtn.addEventListener("click", () => {
   fetchVideos(searchBox.value, categorySelect.value);
 });
 
-// Category filter
 categorySelect.addEventListener("change", () => {
   fetchVideos(searchBox.value, categorySelect.value);
 });
 
-// Upload video
 uploadBtn.addEventListener("click", async () => {
   const uploader = uploaderNameInput.value.trim();
   const videoUrl = videoUrlInput.value.trim();
@@ -268,5 +284,4 @@ uploadBtn.addEventListener("click", async () => {
   }
 });
 
-// Initial fetch
 fetchVideos();
