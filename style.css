@@ -130,3 +130,10 @@ button:hover {
 .delete-btn:hover {
   background-color: #e00;
 }
+
+.adsense-container {
+  margin: 1rem auto;
+  max-width: 728px;
+  width: 100%;
+  text-align: center;
+}
