@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CodeShop - Takunda</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Takunda's Code Shop</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -12,43 +12,54 @@
     <nav>
       <button onclick="showPage('shop')">Shop</button>
       <button onclick="showPage('chat')">Group Chat</button>
-      <button onclick="showPage('ads')">Advertisements</button>
+      <button onclick="showPage('ads')">Adverts</button>
       <button onclick="showPage('buy')">Buy Codes</button>
     </nav>
   </header>
 
   <main>
-    <section id="shop" class="page">
-      <h2>Code Shop</h2>
-      <p>Explore ready-made web apps, games, and more coded by Takunda.</p>
-      <div id="code-list">Loading...</div>
+    <!-- Shop Page -->
+    <section id="shop" class="page active">
+      <h2>Shop Our Codes</h2>
+      <p>Explore HTML, CSS, and JS projects created by Takunda.</p>
+      <!-- Add your content here -->
     </section>
 
-    <section id="chat" class="page hidden">
+    <!-- Group Chat Page -->
+    <section id="chat" class="page">
       <h2>Group Chat</h2>
-      <div id="chat-box"></div>
-      <input type="text" id="chat-name" placeholder="Your name" />
-      <input type="text" id="chat-message" placeholder="Your message" />
+      <div id="messages"></div>
+      <input type="text" id="chat-username" placeholder="Your name">
+      <input type="text" id="chat-message" placeholder="Your message">
       <button onclick="sendMessage()">Send</button>
     </section>
 
-    <section id="ads" class="page hidden">
-      <h2>Video Demos</h2>
-      <div class="video-ads">
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" allowfullscreen></iframe>
+    <!-- Adverts Page -->
+    <section id="ads" class="page">
+      <h2>Code Advertisement</h2>
+      <div class="video-grid">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ" frameborder="0" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" allowfullscreen></iframe>
       </div>
     </section>
 
-    <section id="buy" class="page hidden">
-      <h2>Buy Codes</h2>
-      <p>If you're interested in purchasing a code, email me directly:</p>
-      <a href="mailto:yourname@gmail.com" class="email-btn">Email Takunda</a>
+    <!-- Buy Codes Page -->
+    <section id="buy" class="page">
+      <h2>Buy My Codes</h2>
+      <p>To buy source codes or make requests, send a message below:</p>
+      <input type="text" id="buyer-name" placeholder="Your Name">
+      <input type="email" id="buyer-email" placeholder="Your Email">
+      <textarea id="buyer-message" placeholder="Your Message"></textarea>
+      <button onclick="sendBuyerMessage()">Send Message</button>
+      <p>Your message will be sent to: <strong>takundangonisa7@gmail.com</strong></p>
     </section>
   </main>
 
-  <script type="module" src="firebase-config.js"></script>
+  <footer>
+    <p>&copy; 2025 Takunda Ngonisa. All rights reserved.</p>
+  </footer>
+
   <script type="module" src="app.js"></script>
 </body>
 </html>
