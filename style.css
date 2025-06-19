@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #111;
-  color: #fff;
+  background: #111;
+  color: white;
   margin: 0;
   padding: 0;
 }
@@ -12,21 +12,16 @@ header {
   text-align: center;
 }
 
-header h1 {
-  margin: 0;
-  color: #fff;
-}
-
 nav {
   margin-top: 1rem;
 }
 
 nav button {
+  padding: 0.5rem 1rem;
+  margin: 0.3rem;
+  border: none;
   background-color: #900;
   color: white;
-  padding: 0.5rem 1rem;
-  margin: 0.2rem;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -35,74 +30,44 @@ nav button:hover {
   background-color: #b00;
 }
 
-main {
-  padding: 1rem;
-}
-
 .page {
   display: none;
+  padding: 1rem;
 }
 
 .page.active {
   display: block;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  padding: 0.5rem 0;
-  font-size: 1.1rem;
-  border-bottom: 1px solid #333;
-}
-
 #chat-box {
-  background-color: #222;
+  background: #222;
   padding: 1rem;
-  height: 200px;
+  margin-bottom: 1rem;
+  height: 300px;
   overflow-y: auto;
-  margin-bottom: 1rem;
-  border-radius: 5px;
-  border: 1px solid #444;
+  border-radius: 8px;
 }
 
-#chat-box div {
-  margin-bottom: 0.5rem;
+#chat-form {
+  display: flex;
+  gap: 0.5rem;
 }
 
-input[type="text"] {
-  width: 100%;
+#chat-form input {
+  flex: 1;
   padding: 0.5rem;
-  margin: 0.3rem 0;
-  border-radius: 4px;
-  border: none;
-  background-color: #333;
-  color: #fff;
 }
 
-button {
-  background-color: #900;
+#chat-form button {
+  padding: 0.5rem 1rem;
+  background: #c00;
+  border: none;
   color: white;
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  border: none;
   border-radius: 4px;
-  cursor: pointer;
 }
 
-button:hover {
-  background-color: #b00;
-}
-
-.video-embed {
+.video-ads iframe {
   margin-bottom: 1rem;
-}
-
-iframe {
-  width: 100%;
-  height: 200px;
+  border-radius: 8px;
   border: none;
-  border-radius: 5px;
 }
