@@ -10,19 +10,19 @@ header {
   background-color: #c00;
   padding: 1rem;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
 }
 
 header h1 {
   margin: 0;
-  flex-grow: 1;
+  font-size: 1.5rem;
 }
 
-input, select, button, textarea {
+input, select, button {
   padding: 0.5rem;
-  margin: 0.3rem 0;
+  margin: 0.3rem;
   border-radius: 4px;
   border: none;
   font-size: 1rem;
@@ -39,43 +39,29 @@ button:hover {
   background-color: #b00;
 }
 
-#upload-section, #search-section {
+#upload-section {
+  background-color: #222;
+  padding: 1rem;
   margin: 1rem 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-  align-items: center;
-}
-
-#upload-section input, #upload-section select {
-  flex: 1 1 100%;
-}
-
-#search-box {
-  flex: 1 1 60%;
-  margin: 0.5rem 0;
-}
-
-#category-filter {
-  flex: 1 1 35%;
+  border-radius: 8px;
+  display: none;
 }
 
 #video-list {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: 2rem;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 .video-card {
   background-color: #222;
-  padding: 0.5rem;
-  width: 300px;
+  border: 1px solid #444;
   border-radius: 8px;
+  padding: 0.8rem;
+  width: 300px;
   box-shadow: 0 0 10px #c00;
-  display: flex;
-  flex-direction: column;
-  position: relative;
 }
 
 .video-thumb {
@@ -85,54 +71,35 @@ button:hover {
   border-radius: 6px;
 }
 
-.play-overlay {
-  position: absolute;
-  top: 30%;
-  left: 40%;
-  font-size: 3rem;
-  color: white;
-  opacity: 0.7;
-}
-
 .video-title {
-  font-weight: bold;
+  font-size: 1.2rem;
   margin-top: 0.5rem;
-  font-size: 1.1rem;
   color: #ff4444;
 }
 
-.video-category, .video-uploader {
+.video-info {
   font-size: 0.9rem;
-  color: #aaa;
+  color: #ccc;
+  margin-top: 0.2rem;
 }
 
 .video-controls {
   margin-top: 0.5rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+  justify-content: space-between;
   align-items: center;
 }
 
-.video-controls button {
-  font-size: 0.85rem;
-}
-
-.comment-section {
-  margin-top: 0.5rem;
-  font-size: 0.85rem;
-  color: #ccc;
-}
-
-.comment-section textarea {
-  width: 100%;
-  height: 40px;
-  resize: none;
+.video-controls button, .video-controls a {
   font-size: 0.9rem;
-  border-radius: 5px;
-  padding: 5px;
+  background-color: #900;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  color: white;
+  text-decoration: none;
 }
 
-.comment-section button {
-  margin-top: 0.3rem;
+.video-controls button:hover, .video-controls a:hover {
+  background-color: #b00;
 }
