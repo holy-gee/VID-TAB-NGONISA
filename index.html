@@ -22,7 +22,8 @@
 
   <section id="upload-section">
     <h2>Upload a Video</h2>
-    <input type="text" id="username" placeholder="Your Name" />
+    <input type="password" id="upload-password" placeholder="Enter upload password" />
+    <input type="text" id="username" placeholder="Your Username" />
     <input type="text" id="video-url" placeholder="Video URL (YouTube or direct link)" />
     <input type="text" id="thumbnail-url" placeholder="Thumbnail URL (optional)" />
     <input type="text" id="title" placeholder="Video Title" />
@@ -37,13 +38,11 @@
 
   <main id="video-list"></main>
 
-  <!-- Firebase -->
+  <!-- Firebase config -->
   <script type="module" src="firebase-config.js"></script>
-
-  <!-- Preloaded video list -->
+  <!-- Preloaded 50 videos -->
   <script src="videos.js"></script>
-
-  <!-- Main app logic -->
+  <!-- Main logic -->
   <script type="module" src="app.js"></script>
 </body>
 </html>
