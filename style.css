@@ -1,140 +1,148 @@
-/* General styles */
+/* Neon color palette */
+:root {
+  --neon-red: #ff073a;
+  --neon-pink: #ff33cc;
+  --neon-blue: #00e6ff;
+  --neon-green: #39ff14;
+  --dark-bg: #0a0a0a;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  background-color: #000;
-  color: #0ff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--dark-bg);
+  font-family: var(--font-family);
+  color: var(--neon-green);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
 }
 
 header {
-  background: #00ffff;
+  width: 100%;
   text-align: center;
-  padding: 1rem 0;
-  box-shadow: 0 0 15px #0ff;
+  margin-bottom: 1rem;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 2rem;
-  color: #000;
+.neon-name {
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--neon-red);
   text-shadow:
-    0 0 5px #0ff,
-    0 0 10px #0ff,
-    0 0 20px #0ff;
+    0 0 5px var(--neon-red),
+    0 0 10px var(--neon-red),
+    0 0 20px var(--neon-red),
+    0 0 40px var(--neon-red),
+    0 0 80px var(--neon-red);
+  user-select: none;
 }
 
-/* Main container */
-main {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+.neon-title {
+  color: var(--neon-pink);
+  text-shadow:
+    0 0 5px var(--neon-pink),
+    0 0 10px var(--neon-pink),
+    0 0 20px var(--neon-pink);
+  margin-bottom: 0.5rem;
 }
 
-/* Categories container */
-.categories-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-}
-
-/* Each category card */
-.category-card {
-  background-color: #011;
-  border: 2px solid #0ff;
-  border-radius: 12px;
-  padding: 1.2rem;
-  text-align: center;
-  cursor: pointer;
-  box-shadow:
-    0 0 8px #0ff,
-    0 0 15px #00ffff;
-  transition: box-shadow 0.3s ease;
-}
-
-.category-card:hover {
-  box-shadow:
-    0 0 15px #0ff,
-    0 0 25px #00ffff,
-    0 0 40px #0ff;
-}
-
-/* Project section */
-.hidden {
-  display: none;
-}
-
-#projects {
-  margin-top: 1rem;
-}
-
-.back-btn {
-  background: transparent;
-  border: 2px solid #0ff;
-  color: #0ff;
+.neon-btn {
+  background-color: transparent;
+  border: 2px solid var(--neon-blue);
+  color: var(--neon-blue);
   padding: 0.5rem 1rem;
-  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  font-weight: bold;
   margin-bottom: 1rem;
+  border-radius: 6px;
   box-shadow:
-    0 0 8px #0ff;
-  transition: background-color 0.3s ease;
+    0 0 5px var(--neon-blue),
+    0 0 10px var(--neon-blue);
+  transition: all 0.3s ease;
 }
 
-.back-btn:hover {
-  background-color: #0ff;
-  color: #000;
+.neon-btn:hover {
+  background-color: var(--neon-blue);
+  color: var(--dark-bg);
   box-shadow:
-    0 0 20px #0ff;
+    0 0 10px var(--neon-blue),
+    0 0 20px var(--neon-blue),
+    0 0 40px var(--neon-blue);
 }
 
-#category-title {
-  font-size: 1.6rem;
-  margin-bottom: 1rem;
-  text-shadow: 0 0 10px #0ff;
+main {
+  width: 100%;
+  max-width: 800px;
 }
 
-/* Project list */
-.project-list {
+#categories-container,
+#project-list {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 1rem;
+  justify-content: center;
 }
 
-/* Each project card */
+.category-card,
 .project-card {
-  background-color: #011;
-  border: 2px solid #0ff;
+  background: #111;
+  border: 2px solid var(--neon-pink);
   border-radius: 10px;
   padding: 1rem;
+  width: 180px;
+  cursor: pointer;
+  text-align: center;
+  color: var(--neon-pink);
   box-shadow:
-    0 0 10px #0ff;
+    0 0 5px var(--neon-pink),
+    0 0 15px var(--neon-pink);
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.category-card:hover,
+.project-card:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 10px var(--neon-red),
+    0 0 30px var(--neon-red);
+  border-color: var(--neon-red);
+  color: var(--neon-red);
 }
 
 .project-card h3 {
   margin: 0 0 0.5rem 0;
-  color: #0ff;
-  text-shadow: 0 0 8px #0ff;
 }
 
 .project-card p {
-  margin: 0;
+  font-size: 0.9rem;
+  color: var(--neon-green);
+  text-shadow:
+    0 0 3px var(--neon-green),
+    0 0 7px var(--neon-green);
+}
+
+#details-content {
+  background: #111;
+  border: 2px solid var(--neon-blue);
+  border-radius: 10px;
+  padding: 1rem;
+  color: var(--neon-blue);
+  box-shadow:
+    0 0 10px var(--neon-blue),
+    0 0 30px var(--neon-blue);
+  font-size: 1rem;
+  white-space: pre-wrap;
   line-height: 1.4;
-  color: #88ffff;
 }
 
-/* Scrollbar (optional) */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #000;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #0ff;
-  border-radius: 4px;
+.hidden {
+  display: none !important;
 }
