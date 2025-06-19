@@ -2,61 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Takunda's Code Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Code Shop by Takunda</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Takunda's Code Shop</h1>
+    <h1>Takunda Code Shop</h1>
     <nav>
-      <button onclick="showPage('shop')">Shop</button>
-      <button onclick="showPage('chat')">Group Chat</button>
-      <button onclick="showPage('ads')">Advertisements</button>
-      <button onclick="showPage('buy')">Buy Codes</button>
+      <button data-page="shop-page">Shop</button>
+      <button data-page="chat-page">Group Chat</button>
+      <button data-page="ads-page">Adverts</button>
+      <button data-page="buy-page">Buy Codes</button>
     </nav>
   </header>
 
-  <main>
-    <!-- SHOP PAGE -->
-    <section id="shop" class="page">
-      <h2>Available Codes</h2>
-      <ul>
-        <li>1 - Chating platform = $5</li>
-        <li>2 - 3D game designs = $7</li>
-        <li>3 - All others we negotiate in <strong>takundangonisa7@gmail.com</strong></li>
-      </ul>
-    </section>
+  <section id="shop-page" class="page active">
+    <h2>Available Services</h2>
+    <ul>
+      <li>1 - Chating platform = $5</li>
+      <li>2 - 3D game designs = $7</li>
+      <li>3 - All others we negotiate at <strong>takundangonisa7@gmail.com</strong></li>
+    </ul>
+  </section>
 
-    <!-- GROUP CHAT -->
-    <section id="chat" class="page" style="display: none;">
-      <h2>Group Chat</h2>
-      <div id="chat-box"></div>
-      <input type="text" id="chat-username" placeholder="Your name" />
-      <input type="text" id="chat-message" placeholder="Enter message..." />
-      <button onclick="sendMessage()">Send</button>
-    </section>
+  <section id="chat-page" class="page">
+    <h2>Group Chat</h2>
+    <div id="chat-box"></div>
+    <form id="chat-form">
+      <input type="text" id="message-input" placeholder="Enter your message..." />
+      <button type="submit">Send</button>
+    </form>
+  </section>
 
-    <!-- ADVERTISEMENTS -->
-    <section id="ads" class="page" style="display: none;">
-      <h2>Our Projects in Action</h2>
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-      </div>
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/3GwjfUFyY6M" allowfullscreen></iframe>
-      </div>
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/kJQP7kiw5Fk" allowfullscreen></iframe>
-      </div>
-    </section>
+  <section id="ads-page" class="page">
+    <h2>Adverts</h2>
+    <div class="video-ads">
+      <iframe width="100%" height="200" src="https://www.youtube.com/embed/YQHsXMglC9A" allowfullscreen></iframe>
+      <iframe width="100%" height="200" src="https://www.youtube.com/embed/e-ORhEE9VVg" allowfullscreen></iframe>
+      <iframe width="100%" height="200" src="https://www.youtube.com/embed/LsoLEjrDogU" allowfullscreen></iframe>
+    </div>
+  </section>
 
-    <!-- BUY CODES -->
-    <section id="buy" class="page" style="display: none;">
-      <h2>Contact to Buy</h2>
-      <p>Email me at <strong>takundangonisa7@gmail.com</strong> to buy or negotiate custom code.</p>
-    </section>
-  </main>
+  <section id="buy-page" class="page">
+    <h2>Buy Codes</h2>
+    <p>To purchase a code, email me directly at:</p>
+    <p><strong>takundangonisa7@gmail.com</strong></p>
+  </section>
 
   <script type="module" src="app.js"></script>
 </body>
