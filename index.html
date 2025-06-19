@@ -1,71 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Takunda Ngonisa Productions</title>
-  <link rel="stylesheet" href="style.css" />
-  <meta name="theme-color" content="#c00" />
-  <meta name="google-adsense-account" content="ca-pub-4109711449894245">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4109711449894245" crossorigin="anonymous"></script>
-  <style>
-    #splash-screen {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: #111;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-      font-size: 2rem;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ngonisa Video App</title>
+
+<!-- Google AdSense script -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4109711449894245"
+     crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="splash-screen">TAKUNDA NGONISA PRODUCTIONS</div>
 
-  <header>
-    <h1>Dhogo Productions</h1>
-    <input type="text" id="search-box" placeholder="Search videos..." />
-    <select id="category-filter">
-      <option value="All">All</option>
-      <option value="Kids">Kids</option>
-      <option value="Songs">Songs</option>
-      <option value="Learning">Learning</option>
-    </select>
-  </header>
+<header>
+  <h1>Ngonisa Video App</h1>
+  <div id="login-section">
+    <input type="password" id="upload-password" placeholder="Enter password to upload" />
+    <button id="login-btn">Enter</button>
+  </div>
+  <div id="uploader-info" style="display:none;">
+    Upload enabled for: <span id="uploader-name"></span>
+    <button id="logout-btn">Logout</button>
+  </div>
+</header>
 
-  <section id="upload-section">
-    <h2>Upload a Video</h2>
-    <input type="password" id="upload-password" placeholder="Enter upload password" />
-    <input type="text" id="username" placeholder="Your Username" />
-    <input type="text" id="video-url" placeholder="Video URL (YouTube or direct link)" />
-    <input type="text" id="thumbnail-url" placeholder="Thumbnail URL (optional)" />
-    <input type="text" id="title" placeholder="Video Title" />
-    <select id="upload-category">
-      <option value="Kids">Kids</option>
-      <option value="Songs">Songs</option>
-      <option value="Learning">Learning</option>
-    </select>
-    <textarea id="description" placeholder="Description (optional)"></textarea>
-    <button id="upload-btn">Upload</button>
-  </section>
+<section id="upload-section" style="display:none;">
+  <h2>Upload Video</h2>
+  <input type="text" id="username-input" placeholder="Your username" /><br /><br />
+  <input type="text" id="video-url" placeholder="Video URL (YouTube or direct link)" /><br /><br />
+  <input type="text" id="thumbnail-url" placeholder="Thumbnail image URL (optional)" /><br /><br />
+  <input type="text" id="video-title" placeholder="Video Title" /><br /><br />
+  <select id="video-category">
+    <option value="All">All</option>
+    <option value="Music">Music</option>
+    <option value="Gaming">Gaming</option>
+    <option value="Education">Education</option>
+    <option value="Kids">Kids</option>
+  </select><br /><br />
+  <button id="upload-btn">Upload Video</button>
+</section>
 
-  <main id="video-list"></main>
+<section id="search-section">
+  <input type="text" id="search-input" placeholder="Search videos..." />
+  <button id="search-btn">Search</button>
+  <select id="category-filter">
+    <option value="All">Filter by category</option>
+    <option value="Music">Music</option>
+    <option value="Gaming">Gaming</option>
+    <option value="Education">Education</option>
+    <option value="Kids">Kids</option>
+  </select>
+</section>
 
-  <script type="module" src="firebase-config.js"></script>
-  <script src="videos.js"></script>
-  <script type="module" src="app.js"></script>
-  <script>
-    // Remove splash after 2 seconds
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        const splash = document.getElementById("splash-screen");
-        if (splash) splash.style.display = "none";
-      }, 2000);
-    });
-  </script>
+<main id="videos-container"></main>
+
+<!-- AdSense ad unit -->
+<div class="adsense-container">
+  <ins class="adsbygoogle"
+       style="display:block; text-align:center;"
+       data-ad-client="ca-pub-4109711449894245"
+       data-ad-slot="1234567890"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+</div>
+
+<script type="module" src="app.js"></script>
+
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 </body>
 </html>
