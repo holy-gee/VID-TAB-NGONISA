@@ -19,7 +19,9 @@
     </select>
   </header>
 
-  <section id="upload-section">
+  <button id="show-upload-form">Upload Video</button>
+
+  <section id="upload-section" style="display: none;">
     <h2>Upload a Video</h2>
     <input type="password" id="upload-password" placeholder="Enter upload password" />
     <input type="text" id="username" placeholder="Your Username" />
@@ -31,13 +33,14 @@
       <option value="Songs">Songs</option>
       <option value="Learning">Learning</option>
     </select>
-    <textarea id="description" placeholder="Description (optional)"></textarea>
     <button id="upload-btn">Upload</button>
   </section>
 
   <main id="video-list"></main>
 
+  <!-- Firebase config -->
   <script type="module" src="firebase-config.js"></script>
+  <!-- Main logic -->
   <script type="module" src="app.js"></script>
 </body>
 </html>
