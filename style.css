@@ -1,12 +1,7 @@
-/* Reset */
-* {
-  box-sizing: border-box;
-}
-
 body {
   font-family: Arial, sans-serif;
-  background: #121212;
-  color: #eee;
+  background-color: #111;
+  color: #fff;
   margin: 0;
   padding: 0;
 }
@@ -14,29 +9,26 @@ body {
 header {
   background-color: #c00;
   padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  text-align: center;
 }
 
 header h1 {
   margin: 0;
-  font-size: 1.8rem;
-  flex-grow: 1;
   color: #fff;
+}
+
+nav {
+  margin-top: 1rem;
 }
 
 nav button {
   background-color: #900;
   color: white;
-  border: none;
   padding: 0.5rem 1rem;
-  margin-left: 0.5rem;
-  border-radius: 4px;
+  margin: 0.2rem;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-weight: bold;
 }
 
 nav button:hover {
@@ -45,8 +37,6 @@ nav button:hover {
 
 main {
   padding: 1rem;
-  max-width: 900px;
-  margin: 0 auto;
 }
 
 .page {
@@ -57,73 +47,62 @@ main {
   display: block;
 }
 
-h2 {
-  color: #ff4444;
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-#messages {
-  height: 300px;
-  background: #222;
-  border-radius: 6px;
-  padding: 0.5rem;
+li {
+  padding: 0.5rem 0;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #333;
+}
+
+#chat-box {
+  background-color: #222;
+  padding: 1rem;
+  height: 200px;
   overflow-y: auto;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #444;
+}
+
+#chat-box div {
   margin-bottom: 0.5rem;
-  font-size: 0.9rem;
 }
 
-#messages p {
-  margin: 0.3rem 0;
-  border-bottom: 1px solid #444;
-  padding-bottom: 0.2rem;
-}
-
-input[type="text"],
-input[type="email"],
-textarea {
+input[type="text"] {
   width: 100%;
   padding: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin: 0.3rem 0;
   border-radius: 4px;
   border: none;
-  font-size: 1rem;
-}
-
-textarea {
-  resize: vertical;
-  height: 100px;
+  background-color: #333;
+  color: #fff;
 }
 
 button {
   background-color: #900;
   color: white;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
   border: none;
-  padding: 0.7rem 1.5rem;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: bold;
 }
 
 button:hover {
   background-color: #b00;
 }
 
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
+.video-embed {
+  margin-bottom: 1rem;
 }
 
-.video-grid iframe {
+iframe {
   width: 100%;
-  height: 180px;
-  border-radius: 8px;
-}
-
-footer {
-  background-color: #222;
-  color: #777;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-  font-size: 0.9rem;
+  height: 200px;
+  border: none;
+  border-radius: 5px;
 }
