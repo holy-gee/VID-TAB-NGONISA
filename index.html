@@ -3,43 +3,44 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dhogo Productions</title>
+  <title>Kids Video Hub</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="theme-color" content="#c00" />
 </head>
 <body>
   <header>
-    <h1>Dhogo Productions</h1>
+    <h1>🎥 Kids Video Hub</h1>
     <input type="text" id="search-box" placeholder="Search videos..." />
-    <button id="search-btn">Search</button>
     <select id="category-filter">
-      <option value="All">All Categories</option>
-      <option value="Kids">Kids</option>
+      <option value="All">All</option>
+      <option value="Cartoons">Cartoons</option>
       <option value="Songs">Songs</option>
+      <option value="Stories">Stories</option>
       <option value="Learning">Learning</option>
     </select>
   </header>
 
-  <section id="upload-section" style="display:none;">
-    <h2>Upload a Video (Password protected)</h2>
-    <input type="password" id="upload-password" placeholder="Enter upload password" />
-    <input type="text" id="username" placeholder="Your Username" />
-    <input type="text" id="video-url" placeholder="Video URL (YouTube or direct link)" />
-    <input type="text" id="thumbnail-url" placeholder="Thumbnail URL (optional)" />
+  <section id="upload-toggle">
+    <button id="show-upload">📤 Upload Video (Admin)</button>
+  </section>
+
+  <section id="upload-section" style="display: none;">
+    <input type="password" id="upload-password" placeholder="Password (admin)" />
+    <input type="text" id="username" placeholder="Uploader Name" />
+    <input type="text" id="video-url" placeholder="Video URL (YouTube or direct)" />
+    <input type="text" id="thumbnail-url" placeholder="Thumbnail URL" />
     <input type="text" id="title" placeholder="Video Title" />
-    <select id="upload-category">
-      <option value="Kids">Kids</option>
+    <select id="video-category">
+      <option value="Cartoons">Cartoons</option>
       <option value="Songs">Songs</option>
+      <option value="Stories">Stories</option>
       <option value="Learning">Learning</option>
     </select>
     <button id="upload-btn">Upload</button>
   </section>
 
-  <button id="show-upload-btn">Show Upload Section</button>
+  <main id="video-list"></main>
 
-  <main id="videos-container"></main>
-
-  <!-- Firebase SDK -->
+  <script type="module" src="firebase-config.js"></script>
   <script type="module" src="app.js"></script>
 </body>
 </html>
