@@ -1,113 +1,49 @@
-const data = {
-  "DC Motor": [
-    {
-      title: "Basic DC Motor",
-      description: "Build a simple DC motor using a battery, magnet, and wire coil. The electric current creates a magnetic field that spins the coil."
-    },
-    {
-      title: "Brushless DC Motor",
-      description: "A more efficient motor without brushes. Uses permanent magnets and electronic control to spin the rotor."
-    }
-  ],
-  "Drone": [
-    {
-      title: "Quadcopter Drone",
-      description: "Build a quadcopter drone using four rotors controlled by a flight controller and powered by a LiPo battery."
-    },
-    {
-      title: "Fixed Wing Drone",
-      description: "A drone with wings for fixed flight, designed for longer flight time and better aerodynamics."
-    }
-  ],
-  "Solar Power": [
-    {
-      title: "Solar Panel Setup",
-      description: "Learn to connect solar panels to a battery and inverter to power your home devices."
-    },
-    {
-      title: "Solar Water Heater",
-      description: "Build a solar water heater using black tubing and a transparent cover to trap heat."
-    }
-  ],
-  // Add more categories and projects as you like
+const categories = {
+  "DC Motor": "To build a DC motor, you need a magnet, a coil of copper wire, and a battery. Create a simple rotating shaft setup and connect the wire ends to the battery terminals.",
+  "Drone": "To make a drone, use a flight controller, 4 brushless motors, ESCs, a frame, battery, and propellers. Assemble parts and flash firmware like Betaflight.",
+  "Solar Fan": "Connect a small DC fan to a solar panel. Ensure the voltage of the panel matches the fan. Mount the setup inside a box or on a board.",
+  "Wind Turbine": "Use a DC motor as a generator, mount blades to the shaft, and place it on a pole. Connect wires to LEDs or battery for storage.",
+  "Electric Car": "Use motors, wheels, battery, and controller. Design a frame with switch-based direction and motor mount. Add steering using servo or gears.",
+  "Bluetooth Speaker": "Use an audio amplifier module, Bluetooth module, rechargeable battery, and a speaker driver. Connect and enclose it inside a box.",
+  "Wireless Charger": "Use an induction coil module. Connect transmitter coil to a 5V source and receiver to a rechargeable battery circuit.",
+  "Laser Alarm": "Use a laser pointer, LDR sensor, and buzzer. Align laser to the LDR. If the beam breaks, buzzer is triggered via a transistor.",
+  "Vacuum Cleaner": "Use a high-speed DC motor, fan blades, container and filter. Assemble a handle and plug into a power source.",
+  "Water Pump": "Use a DC motor with plastic tubing, and create an impeller inside a housing. Seal well to avoid leaks.",
+  "Flashlight": "Use an LED, resistor, battery, and switch. Enclose it in a tube with reflector for better focus.",
+  "RFID Door Lock": "Use Arduino, RFID reader, servo motor, and tag. When valid tag is detected, servo unlocks the latch.",
+  "Mini Fridge": "Use a Peltier module, heat sink, fan, and power source. Sandwich the module between heat sinks with fan cooling.",
+  "Sound Sensor Light": "Use a sound sensor and Arduino to detect clap or sound, then turn on/off an LED or bulb via relay.",
+  "Motion Sensor Alarm": "Use PIR sensor and buzzer. When motion is detected, it triggers the buzzer using a transistor or microcontroller.",
+  "3D Hologram": "Use 4 transparent plastic panels arranged in a pyramid shape. Play hologram video to project a floating 3D image.",
+  "Electronic Safe": "Use a keypad, Arduino, and servo motor. When correct pin is entered, servo unlocks the latch of the safe.",
+  "Smart Plant Waterer": "Use soil moisture sensor, Arduino, relay module and small water pump. Auto-waters when soil is dry.",
+  "Coin Separator": "Use slanted platform with different hole sizes or weights to sort coins by diameter or mass.",
+  "Wireless Electricity": "Use Tesla coil principle with high-frequency transformer and secondary coil to transmit low-wattage energy wirelessly."
 };
 
-// DOM Elements
-const categoriesContainer = document.getElementById("categories-container");
-const projectsSection = document.getElementById("projects-section");
-const projectsBackBtn = document.getElementById("projects-back-btn");
-const categoryTitle = document.getElementById("category-title");
-const projectList = document.getElementById("project-list");
+// Create and display categories
+const categoryContainer = document.querySelector(".categories");
+const projectSection = document.querySelector(".project");
 
-const detailsSection = document.getElementById("details");
-const detailsBackBtn = document.getElementById("details-back-btn");
-const detailsTitle = document.getElementById("details-title");
-const detailsContent = document.getElementById("details-content");
-
-const categoriesSection = document.getElementById("categories-section");
-
-// Show categories on load
-function showCategories() {
-  categoriesContainer.innerHTML = "";
-  for (const category in data) {
-    const div = document.createElement("div");
-    div.className = "category-card";
-    div.textContent = category;
-    div.onclick = () => showProjects(category);
-    categoriesContainer.appendChild(div);
-  }
-  categoriesSection.classList.remove("hidden");
-  projectsSection.classList.add("hidden");
-  detailsSection.classList.add("hidden");
+for (let name in categories) {
+  const div = document.createElement("div");
+  div.className = "category";
+  div.textContent = name;
+  div.onclick = () => showProject(name);
+  categoryContainer.appendChild(div);
 }
 
-// Show projects in selected category
-function showProjects(category) {
-  categoryTitle.textContent = category;
-  projectList.innerHTML = "";
-
-  data[category].forEach(project => {
-    const div = document.createElement("div");
-    div.className = "project-card";
-
-    const title = document.createElement("h3");
-    title.textContent = project.title;
-
-    const desc = document.createElement("p");
-    desc.textContent = project.description;
-
-    div.appendChild(title);
-    div.appendChild(desc);
-
-    div.onclick = () => showDetails(category, project);
-
-    projectList.appendChild(div);
-  });
-
-  categoriesSection.classList.add("hidden");
-  projectsSection.classList.remove("hidden");
-  detailsSection.classList.add("hidden");
+function showProject(name) {
+  categoryContainer.style.display = "none";
+  projectSection.classList.add("active");
+  projectSection.innerHTML = `
+    <h2>${name}</h2>
+    <p>${categories[name]}</p>
+    <button class="back-btn" onclick="goBack()">← Back to Categories</button>
+  `;
 }
 
-// Show project details
-function showDetails(category, project) {
-  detailsTitle.textContent = project.title;
-  detailsContent.textContent = project.description + "\n\n[Here you can add full detailed instructions, images, or videos on how to build it.]";
-
-  categoriesSection.classList.add("hidden");
-  projectsSection.classList.add("hidden");
-  detailsSection.classList.remove("hidden");
+function goBack() {
+  projectSection.classList.remove("active");
+  categoryContainer.style.display = "grid";
 }
-
-// Back buttons
-projectsBackBtn.onclick = () => {
-  showCategories();
-};
-
-detailsBackBtn.onclick = () => {
-  projectsSection.classList.remove("hidden");
-  detailsSection.classList.add("hidden");
-};
-
-// Initialize on page load
-showCategories();
