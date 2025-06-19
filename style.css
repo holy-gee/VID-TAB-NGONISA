@@ -1,148 +1,86 @@
-/* Neon color palette */
-:root {
-  --neon-red: #ff073a;
-  --neon-pink: #ff33cc;
-  --neon-blue: #00e6ff;
-  --neon-green: #39ff14;
-  --dark-bg: #0a0a0a;
-  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
-  background-color: var(--dark-bg);
-  font-family: var(--font-family);
-  color: var(--neon-green);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #000;
+  color: #fff;
 }
 
 header {
-  width: 100%;
+  background-color: #0f0f0f;
   text-align: center;
-  margin-bottom: 1rem;
+  padding: 20px;
+  border-bottom: 2px solid #0ff;
+  box-shadow: 0 0 20px #0ff;
 }
 
-.neon-name {
-  font-size: 3rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: var(--neon-red);
-  text-shadow:
-    0 0 5px var(--neon-red),
-    0 0 10px var(--neon-red),
-    0 0 20px var(--neon-red),
-    0 0 40px var(--neon-red),
-    0 0 80px var(--neon-red);
-  user-select: none;
-}
-
-.neon-title {
-  color: var(--neon-pink);
-  text-shadow:
-    0 0 5px var(--neon-pink),
-    0 0 10px var(--neon-pink),
-    0 0 20px var(--neon-pink);
-  margin-bottom: 0.5rem;
-}
-
-.neon-btn {
-  background-color: transparent;
-  border: 2px solid var(--neon-blue);
-  color: var(--neon-blue);
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  box-shadow:
-    0 0 5px var(--neon-blue),
-    0 0 10px var(--neon-blue);
-  transition: all 0.3s ease;
-}
-
-.neon-btn:hover {
-  background-color: var(--neon-blue);
-  color: var(--dark-bg);
-  box-shadow:
-    0 0 10px var(--neon-blue),
-    0 0 20px var(--neon-blue),
-    0 0 40px var(--neon-blue);
+header h1 {
+  color: #0ff;
+  font-size: 2.5rem;
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
 }
 
 main {
-  width: 100%;
-  max-width: 800px;
+  padding: 20px;
 }
 
-#categories-container,
-#project-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
 }
 
-.category-card,
-.project-card {
+.category {
   background: #111;
-  border: 2px solid var(--neon-pink);
-  border-radius: 10px;
-  padding: 1rem;
-  width: 180px;
-  cursor: pointer;
+  border: 2px solid #0ff;
+  padding: 15px;
   text-align: center;
-  color: var(--neon-pink);
-  box-shadow:
-    0 0 5px var(--neon-pink),
-    0 0 15px var(--neon-pink);
-  transition: transform 0.2s ease;
-  user-select: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px #0ff;
 }
 
-.category-card:hover,
-.project-card:hover {
+.category:hover {
+  background: #0ff;
+  color: #000;
   transform: scale(1.05);
-  box-shadow:
-    0 0 10px var(--neon-red),
-    0 0 30px var(--neon-red);
-  border-color: var(--neon-red);
-  color: var(--neon-red);
 }
 
-.project-card h3 {
-  margin: 0 0 0.5rem 0;
+.project {
+  display: none;
 }
 
-.project-card p {
-  font-size: 0.9rem;
-  color: var(--neon-green);
-  text-shadow:
-    0 0 3px var(--neon-green),
-    0 0 7px var(--neon-green);
-}
-
-#details-content {
+.project.active {
+  display: block;
   background: #111;
-  border: 2px solid var(--neon-blue);
-  border-radius: 10px;
-  padding: 1rem;
-  color: var(--neon-blue);
-  box-shadow:
-    0 0 10px var(--neon-blue),
-    0 0 30px var(--neon-blue);
-  font-size: 1rem;
-  white-space: pre-wrap;
-  line-height: 1.4;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0 10px #0ff;
 }
 
-.hidden {
-  display: none !important;
+.project h2 {
+  color: #0ff;
+  text-shadow: 0 0 5px #0ff;
+}
+
+.project p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+button.back-btn {
+  margin-top: 20px;
+  background-color: #0ff;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+button.back-btn:hover {
+  background-color: #00cccc;
 }
