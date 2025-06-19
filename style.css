@@ -10,19 +10,19 @@ header {
   background-color: #c00;
   padding: 1rem;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 header h1 {
+  flex-grow: 1;
   margin: 0;
-  font-size: 1.5rem;
 }
 
 input, select, button {
   padding: 0.5rem;
-  margin: 0.3rem;
+  margin: 0.3rem 0;
   border-radius: 4px;
   border: none;
   font-size: 1rem;
@@ -33,6 +33,7 @@ button {
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border: none;
 }
 
 button:hover {
@@ -40,28 +41,30 @@ button:hover {
 }
 
 #upload-section {
-  background-color: #222;
-  padding: 1rem;
   margin: 1rem 0;
+  padding: 1rem;
+  background-color: #222;
   border-radius: 8px;
-  display: none;
+  max-width: 400px;
 }
 
-#video-list {
+#videos-container {
+  margin-bottom: 2rem;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1rem;
-  justify-content: center;
-  margin-top: 1rem;
 }
 
 .video-card {
   background-color: #222;
-  border: 1px solid #444;
+  padding: 0.5rem;
   border-radius: 8px;
-  padding: 0.8rem;
-  width: 300px;
   box-shadow: 0 0 10px #c00;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
 }
 
 .video-thumb {
@@ -72,34 +75,49 @@ button:hover {
 }
 
 .video-title {
-  font-size: 1.2rem;
+  font-weight: bold;
   margin-top: 0.5rem;
+  font-size: 1.1rem;
   color: #ff4444;
 }
 
-.video-info {
+.video-uploader {
   font-size: 0.9rem;
   color: #ccc;
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
+}
+
+.video-category {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 0.3rem;
 }
 
 .video-controls {
   margin-top: 0.5rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  gap: 0.5rem;
 }
 
-.video-controls button, .video-controls a {
-  font-size: 0.9rem;
+.like-btn, .download-btn, .delete-btn {
   background-color: #900;
-  border: none;
-  padding: 0.4rem 0.6rem;
-  border-radius: 4px;
   color: white;
-  text-decoration: none;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  border: none;
+  user-select: none;
 }
 
-.video-controls button:hover, .video-controls a:hover {
+.like-btn:hover, .download-btn:hover {
   background-color: #b00;
+}
+
+.delete-btn {
+  background-color: #b00;
+}
+
+.delete-btn:hover {
+  background-color: #e00;
 }
