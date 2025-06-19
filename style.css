@@ -3,24 +3,20 @@ body {
   background-color: #111;
   color: white;
   margin: 0;
-  padding: 0 1rem;
+  padding: 1rem;
 }
 
 header {
   background-color: #c00;
   padding: 1rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
-header h1 {
-  margin: 0;
-  flex-grow: 1;
-}
-
-input, select, button, textarea {
+input, select, button {
   padding: 0.5rem;
   margin: 0.3rem 0;
   border-radius: 4px;
@@ -40,46 +36,67 @@ button:hover {
 }
 
 #upload-section {
-  margin: 1rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  margin-top: 1rem;
+  background: #222;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 8px #c00;
 }
 
 #video-list {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin: 2rem 0;
+  margin-top: 2rem;
 }
 
 .video-card {
   background: #222;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 0.5rem;
   width: 300px;
-  box-shadow: 0 0 10px #c00;
+  border-radius: 8px;
+  box-shadow: 0 0 6px #c00;
 }
 
-.video-card img,
-.video-card iframe,
-.video-card video {
+.video-thumb {
   width: 100%;
   height: 170px;
   object-fit: cover;
   border-radius: 6px;
 }
 
-.video-card h3 {
+.video-title {
+  font-weight: bold;
   color: #ff4444;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0;
 }
 
-.video-card .meta {
+.video-uploader,
+.video-category {
   font-size: 0.9rem;
   color: #aaa;
 }
 
-.video-card button {
+.video-controls {
   margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+button.download-btn,
+button.delete-btn,
+button.like-btn {
+  background-color: #900;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+button.download-btn:hover,
+button.delete-btn:hover,
+button.like-btn:hover {
+  background-color: #b00;
 }
