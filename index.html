@@ -3,25 +3,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DIY Inventions Hub</title>
+  <title>Takunda Ngonisa DIY Inventions</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="theme-color" content="#0ff" />
 </head>
 <body>
   <header>
-    <h1>DIY Inventions Hub</h1>
+    <h1 class="neon-name">Takunda Ngonisa</h1>
   </header>
 
   <main>
-    <section id="categories" class="categories-container"></section>
+    <section id="categories-section">
+      <h2 class="neon-title">DIY Invention Categories</h2>
+      <div id="categories-container"></div>
+    </section>
 
-    <section id="projects" class="hidden">
-      <button id="back-btn" class="back-btn">← Back to Categories</button>
-      <h2 id="category-title"></h2>
-      <div id="project-list" class="project-list"></div>
+    <section id="projects-section" class="hidden">
+      <button id="projects-back-btn" class="neon-btn">← Back to Categories</button>
+      <h2 id="category-title" class="neon-title"></h2>
+      <div id="project-list"></div>
+    </section>
+
+    <section id="details" class="hidden">
+      <button id="details-back-btn" class="neon-btn">← Back to Projects</button>
+      <h2 id="details-title" class="neon-title"></h2>
+      <div id="details-content" class="neon-content"></div>
     </section>
   </main>
-  
+
   <script src="app.js"></script>
 </body>
 </html>
