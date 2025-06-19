@@ -1,118 +1,139 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 1rem;
   background-color: #111;
   color: white;
+  margin: 0;
+  padding: 0 1rem;
 }
 
 header {
   background-color: #c00;
-  color: white;
   padding: 1rem;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-header input,
-header select {
-  margin-top: 1rem;
+header h1 {
+  margin: 0;
+  flex-grow: 1;
+}
+
+input, select, button {
   padding: 0.5rem;
-  font-size: 1rem;
-}
-
-#upload-section {
-  margin: 1.5rem 0;
-  background: #222;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 8px #c00;
-}
-
-#upload-section input,
-#upload-section select,
-#upload-section textarea {
-  display: block;
-  width: 100%;
-  margin: 0.5rem 0;
-  padding: 0.6rem;
-  font-size: 1rem;
-  border-radius: 6px;
+  margin: 0.3rem 0;
+  border-radius: 4px;
   border: none;
+  font-size: 1rem;
 }
 
-#upload-btn {
-  background-color: #c00;
+button {
+  background-color: #900;
   color: white;
-  padding: 0.7rem 1rem;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
   cursor: pointer;
-  margin-top: 0.5rem;
+  transition: background-color 0.3s ease;
 }
 
-#upload-btn:hover {
-  background-color: #e00;
+button:hover {
+  background-color: #b00;
 }
 
-#video-list {
+#upload-section, #search-section {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+#upload-section input, #upload-section select {
+  flex: 1 1 100%;
+}
+
+#search-section input {
+  flex: 1 1 60%;
+}
+
+#search-section button, #search-section select {
+  flex: 1 1 18%;
+  min-width: 120px;
+}
+
+#videos-container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .video-card {
   background-color: #222;
+  padding: 0.5rem;
   width: 300px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 0 8px #c00;
-  padding-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #c00;
+  display: flex;
+  flex-direction: column;
 }
 
 .video-thumb {
   width: 100%;
   height: 170px;
   object-fit: cover;
+  border-radius: 6px;
 }
 
 .video-title {
-  font-size: 1.1rem;
   font-weight: bold;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
   color: #ff4444;
-  margin: 0.5rem;
 }
 
-.video-description {
+.video-category {
   font-size: 0.9rem;
-  color: #ccc;
-  margin: 0 0.5rem;
-  min-height: 2.5rem;
-}
-
-.video-meta {
-  font-size: 0.85rem;
-  margin: 0.5rem;
   color: #aaa;
 }
 
-.video-actions {
+.video-uploader {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.video-controls {
+  margin-top: 0.5rem;
   display: flex;
   justify-content: space-between;
-  margin: 0.5rem;
+  align-items: center;
 }
 
-.video-actions button {
-  padding: 0.4rem 0.8rem;
+.like-btn, .download-btn, .delete-btn {
   background-color: #900;
   border: none;
-  border-radius: 5px;
   color: white;
+  padding: 0.3rem 0.8rem;
   cursor: pointer;
+  border-radius: 4px;
   font-size: 0.9rem;
+  margin-left: 0.3rem;
 }
 
-.video-actions button:hover {
+.like-btn:hover, .download-btn:hover {
   background-color: #b00;
+}
+
+.delete-btn {
+  background-color: #b00;
+}
+
+.delete-btn:hover {
+  background-color: #e00;
+}
+
+.adsense-container {
+  margin: 1rem auto;
+  max-width: 728px;
+  width: 100%;
+  text-align: center;
 }
