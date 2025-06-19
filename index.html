@@ -2,34 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Takunda Ngonisa DIY Inventions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIY Inventions</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1 class="neon-name">Takunda Ngonisa</h1>
+    <h1>DIY Inventions Hub</h1>
   </header>
 
   <main>
-    <section id="categories-section">
-      <h2 class="neon-title">DIY Invention Categories</h2>
-      <div id="categories-container"></div>
+    <section id="categories">
+      <h2>Select an Invention Category</h2>
+      <ul id="category-list">
+        <!-- Categories will be rendered here -->
+      </ul>
     </section>
 
-    <section id="projects-section" class="hidden">
-      <button id="projects-back-btn" class="neon-btn">← Back to Categories</button>
-      <h2 id="category-title" class="neon-title"></h2>
-      <div id="project-list"></div>
-    </section>
-
-    <section id="details" class="hidden">
-      <button id="details-back-btn" class="neon-btn">← Back to Projects</button>
-      <h2 id="details-title" class="neon-title"></h2>
-      <div id="details-content" class="neon-content"></div>
+    <section id="projects" style="display: none;">
+      <button onclick="goBack()">Back to Categories</button>
+      <h2 id="project-title">Projects in: </h2>
+      <ul id="project-list">
+        <!-- Projects will be shown here -->
+      </ul>
     </section>
   </main>
 
-  <script src="app.js"></script>
+  <script>
+    const categories = {
+      "DC Motor": ["Simple Fan", "RC Car", "Automatic Door"],
+      "Drone": ["Quadcopter Build", "Mini Drone Camera"],
+      "Solar": ["Solar Phone Charger", "Solar Lamp"],
+      "Arduino": ["Temperature Sensor", "RFID Door Lock"],
+      "Bluetooth": ["Wireless Car", "Bluetooth Speaker"],
+      "Recycled": ["Bottle Sprinkler", "Plastic Fan"],
+      "Remote": ["TV Remote Jammer", "RF Controlled Car"],
+      "Home Automation": ["Smart Light", "Gas Detector"],
+      "Sound": ["Clap Switch", "Buzzer Alarm"],
+      "Laser": ["Laser Tripwire", "Laser Gun"],
+      "Magnet": ["Magnet Car", "Electromagnet Crane"],
+      "Hydraulic": ["Hydraulic Arm", "Hydraulic Lift"],
+      "Wind": ["Wind Turbine", "Wind Car"],
+      "Battery": ["Battery Tester", "Battery Powered Boat"],
+      "Water": ["Water Alarm", "Water Cleaner"],
+      "LED": ["LED Cube", "LED Flasher"],
+      "Camera": ["CCTV Setup", "Motion Camera"],
+      "Infrared": ["IR Sensor Light", "IR Door Opener"],
+      "Touch": ["Touch Switch", "Touch Alarm"],
+      "GSM": ["SMS Alert System", "GSM Door Lock"]
+    };
+
+    const categoryList = document.getElementById("category-list");
+    const projectList = document.getElementById("project-list");
+    const projectTitle = document.getElementById("project-title");
+    const categoriesSection = document.getElementById("categories");
+    const projectsSection = document.getElementById("projects");
+
+    Object.keys(categories).forEach(cat => {
+      const li = document.createElement("li");
+      li.textContent = cat;
+      li.onclick = () => showProjects(cat);
+      categoryList.appendChild(li);
+    });
+
+    function showProjects(category) {
+      categoriesSection.style.display = "none";
+      projectsSection.style.display = "block";
+      projectTitle.textContent = `Projects in: ${category}`;
+      projectList.innerHTML = "";
+
+      categories[category].forEach(project => {
+        const item = document.createElement("li");
+        item.textContent = project;
+        item.onclick = () => alert(`How to build: ${project}`);
+        projectList.appendChild(item);
+      });
+    }
+
+    function goBack() {
+      categoriesSection.style.display = "block";
+      projectsSection.style.display = "none";
+    }
+  </script>
 </body>
 </html>
