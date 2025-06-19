@@ -6,6 +6,7 @@
   <title>Dhogo Productions</title>
   <link rel="stylesheet" href="style.css" />
   <meta name="theme-color" content="#c00" />
+  <meta name="google-adsense-account" content="ca-pub-4109711449894245" />
 </head>
 <body>
   <header>
@@ -19,27 +20,35 @@
     </select>
   </header>
 
-  <button id="toggle-upload">Upload a Video</button>
-
-  <section id="upload-section" style="display: none;">
-    <input type="password" id="upload-password" placeholder="Enter upload password" />
-    <input type="text" id="username" placeholder="Your Username" />
-    <input type="text" id="video-url" placeholder="Video URL (YouTube or direct link)" />
-    <input type="text" id="thumbnail-url" placeholder="Thumbnail URL (optional)" />
-    <input type="text" id="title" placeholder="Video Title" />
-    <select id="upload-category">
-      <option value="Kids">Kids</option>
-      <option value="Songs">Songs</option>
-      <option value="Learning">Learning</option>
-    </select>
-    <button id="upload-btn">Upload</button>
+  <section>
+    <button onclick="toggleUpload()">📤 Upload Video</button>
+    <div id="upload-section" style="display: none;">
+      <input type="password" id="upload-password" placeholder="Password" />
+      <input type="text" id="username" placeholder="Your Username" />
+      <input type="text" id="video-url" placeholder="Video URL (YouTube or direct)" />
+      <input type="text" id="thumbnail-url" placeholder="Thumbnail URL (optional)" />
+      <input type="text" id="title" placeholder="Video Title" />
+      <select id="upload-category">
+        <option value="Kids">Kids</option>
+        <option value="Songs">Songs</option>
+        <option value="Learning">Learning</option>
+      </select>
+      <button id="upload-btn">Upload</button>
+    </div>
   </section>
 
   <main id="video-list"></main>
 
-  <!-- Firebase config -->
+  <!-- Firebase Config -->
   <script type="module" src="firebase-config.js"></script>
-  <!-- Main logic -->
+  <!-- Main App Logic -->
   <script type="module" src="app.js"></script>
+
+  <script>
+    function toggleUpload() {
+      const section = document.getElementById("upload-section");
+      section.style.display = section.style.display === "none" ? "block" : "none";
+    }
+  </script>
 </body>
 </html>
