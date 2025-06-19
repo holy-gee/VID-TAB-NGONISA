@@ -1,46 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kids Video Hub</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flag Quiz - Guess the Country</title>
+<style>
+  body {
+    background: #111;
+    color: #eee;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 2rem;
+  }
+  h1 {
+    color: #c00;
+    margin-bottom: 1rem;
+  }
+  #flag {
+    width: 240px;
+    height: 160px;
+    border: 4px solid #c00;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    object-fit: contain;
+    background: #222;
+  }
+  #answers {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  button.answer-btn {
+    background: #333;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex: 1;
+  }
+  button.answer-btn:hover:not(.disabled) {
+    background: #c00;
+  }
+  button.answer-btn.disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+  #feedback {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    min-height: 1.5rem;
+  }
+  #score {
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  #next-btn, #restart-btn {
+    background: #c00;
+    border: none;
+    color: white;
+    padding: 0.7rem 2rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0 0.5rem;
+  }
+  #next-btn:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>🎥 Kids Video Hub</h1>
-    <input type="text" id="search-box" placeholder="Search videos..." />
-    <select id="category-filter">
-      <option value="All">All</option>
-      <option value="Cartoons">Cartoons</option>
-      <option value="Songs">Songs</option>
-      <option value="Stories">Stories</option>
-      <option value="Learning">Learning</option>
-    </select>
-  </header>
 
-  <section id="upload-toggle">
-    <button id="show-upload">📤 Upload Video (Admin)</button>
-  </section>
+<h1>Guess the Country by Flag</h1>
+<img id="flag" src="" alt="Country flag" />
+<div id="answers"></div>
+<div id="feedback"></div>
+<div id="score">Score: 0</div>
+<button id="next-btn" disabled>Next</button>
+<button id="restart-btn">Restart</button>
 
-  <section id="upload-section" style="display: none;">
-    <input type="password" id="upload-password" placeholder="Password (admin)" />
-    <input type="text" id="username" placeholder="Uploader Name" />
-    <input type="text" id="video-url" placeholder="Video URL (YouTube or direct)" />
-    <input type="text" id="thumbnail-url" placeholder="Thumbnail URL" />
-    <input type="text" id="title" placeholder="Video Title" />
-    <select id="video-category">
-      <option value="Cartoons">Cartoons</option>
-      <option value="Songs">Songs</option>
-      <option value="Stories">Stories</option>
-      <option value="Learning">Learning</option>
-    </select>
-    <button id="upload-btn">Upload</button>
-  </section>
+<script>
+  const countries = [
+    { name: "United States", flag: "https://flagcdn.com/us.svg" },
+    { name: "Canada", flag: "https://flagcdn.com/ca.svg" },
+    { name: "Brazil", flag: "https://flagcdn.com/br.svg" },
+    { name: "France", flag: "https://flagcdn.com/fr.svg" },
+    { name: "Germany", flag: "https://flagcdn.com/de.svg" },
+    { name: "Japan", flag: "https://flagcdn.com/jp.svg" },
+    { name: "South Korea", flag: "https://flagcdn.com/kr.svg" },
+    { name: "Australia", flag: "https://flagcdn.com/au.svg" },
+    { name: "India", flag: "https://flagcdn.com/in.svg" },
+    { name: "Mexico", flag: "https://flagcdn.com/mx.svg" },
+    { name: "Italy", flag: "https://flagcdn.com/it.svg" },
+    { name: "Spain", flag: "https://flagcdn.com/es.svg" },
+    { name: "United Kingdom", flag: "https://flagcdn.com/gb.svg" },
+    { name: "China", flag: "https://flagcdn.com/cn.svg" },
+    { name: "Russia", flag: "https://flagcdn.com/ru.svg" }
+  ];
 
-  <main id="video-list"></main>
+  const flagImg = document.getElementById("flag");
+  const answersDiv = document.getElementById("answers");
+  const feedbackDiv = document.getElementById("feedback");
+  const scoreDiv = document.getElementById("score");
+  const nextBtn = document.getElementById("next-btn");
+  const restartBtn = document.getElementById("restart-btn");
 
-  <script type="module" src="firebase-config.js"></script>
-  <script type="module" src="app.js"></script>
+  let score = 0;
+  let currentCountry = null;
+  let answered = false;
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  function getRandomCountry(exclude) {
+    let filtered = countries.filter(c => c !== exclude);
+    return filtered[Math.floor(Math.random() * filtered.length)];
+  }
+
+  function newQuestion() {
+    answered = false;
+    feedbackDiv.textContent = "";
+    nextBtn.disabled = true;
+    answersDiv.innerHTML = "";
+
+    // Pick a random country as the correct answer
+    currentCountry = countries[Math.floor(Math.random() * countries.length)];
+    flagImg.src = currentCountry.flag;
+    flagImg.alt = "Flag of " + currentCountry.name;
+
+    // Prepare answers: correct + 2 random wrongs
+    let options = [currentCountry];
+    while (options.length < 3) {
+      let randomCountry = getRandomCountry(currentCountry);
+      if (!options.includes(randomCountry)) options.push(randomCountry);
+    }
+
+    shuffle(options);
+
+    options.forEach(country => {
+      const btn = document.createElement("button");
+      btn.className = "answer-btn";
+      btn.textContent = country.name;
+      btn.onclick = () => {
+        if (answered) return;
+        answered = true;
+
+        // Disable all buttons
+        Array.from(answersDiv.children).forEach(b => b.classList.add("disabled"));
+
+        if (country === currentCountry) {
+          feedbackDiv.textContent = "Correct! 🎉";
+          score++;
+          scoreDiv.textContent = `Score: ${score}`;
+          btn.style.backgroundColor = "#0a0"; // green
+        } else {
+          feedbackDiv.textContent = `Wrong! The correct answer is ${currentCountry.name}.`;
+          btn.style.backgroundColor = "#a00"; // red
+          // Highlight correct answer
+          Array.from(answersDiv.children).forEach(b => {
+            if (b.textContent === currentCountry.name) {
+              b.style.backgroundColor = "#0a0";
+            }
+          });
+        }
+        nextBtn.disabled = false;
+      };
+      answersDiv.appendChild(btn);
+    });
+  }
+
+  nextBtn.onclick = () => {
+    newQuestion();
+  };
+
+  restartBtn.onclick = () => {
+    score = 0;
+    scoreDiv.textContent = `Score: ${score}`;
+    feedbackDiv.textContent = "";
+    newQuestion();
+  };
+
+  // Start first question
+  newQuestion();
+</script>
+
 </body>
 </html>
