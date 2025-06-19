@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DIY Inventions Hub</title>
   <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#0ff" />
 </head>
 <body>
   <header>
@@ -12,21 +13,15 @@
   </header>
 
   <main>
-    <section id="categories">
-      <!-- Categories will be injected here -->
-    </section>
+    <section id="categories" class="categories-container"></section>
 
     <section id="projects" class="hidden">
-      <button id="back-btn">← Back to Categories</button>
+      <button id="back-btn" class="back-btn">← Back to Categories</button>
       <h2 id="category-title"></h2>
-      <div id="project-list"></div>
+      <div id="project-list" class="project-list"></div>
     </section>
   </main>
-
-  <footer>
-    <p>Made with 💡 by Takunda Ngonisa</p>
-  </footer>
-
+  
   <script src="app.js"></script>
 </body>
 </html>
