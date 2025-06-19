@@ -3,20 +3,24 @@ body {
   background-color: #111;
   color: white;
   margin: 0;
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 header {
   background-color: #c00;
   padding: 1rem;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-input, select, button {
+header h1 {
+  margin: 0;
+  flex-grow: 1;
+}
+
+input, select, button, textarea {
   padding: 0.5rem;
   margin: 0.3rem 0;
   border-radius: 4px;
@@ -35,27 +39,43 @@ button:hover {
   background-color: #b00;
 }
 
-#upload-section {
-  margin-top: 1rem;
-  background: #222;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 8px #c00;
+#upload-section, #search-section {
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+#upload-section input, #upload-section select {
+  flex: 1 1 100%;
+}
+
+#search-box {
+  flex: 1 1 60%;
+  margin: 0.5rem 0;
+}
+
+#category-filter {
+  flex: 1 1 35%;
 }
 
 #video-list {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .video-card {
-  background: #222;
+  background-color: #222;
   padding: 0.5rem;
   width: 300px;
   border-radius: 8px;
-  box-shadow: 0 0 6px #c00;
+  box-shadow: 0 0 10px #c00;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .video-thumb {
@@ -65,14 +85,23 @@ button:hover {
   border-radius: 6px;
 }
 
-.video-title {
-  font-weight: bold;
-  color: #ff4444;
-  margin: 0.5rem 0;
+.play-overlay {
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  font-size: 3rem;
+  color: white;
+  opacity: 0.7;
 }
 
-.video-uploader,
-.video-category {
+.video-title {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: #ff4444;
+}
+
+.video-category, .video-uploader {
   font-size: 0.9rem;
   color: #aaa;
 }
@@ -80,23 +109,30 @@ button:hover {
 .video-controls {
   margin-top: 0.5rem;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
 }
 
-button.download-btn,
-button.delete-btn,
-button.like-btn {
-  background-color: #900;
-  color: white;
-  border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
+.video-controls button {
+  font-size: 0.85rem;
+}
+
+.comment-section {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #ccc;
+}
+
+.comment-section textarea {
+  width: 100%;
+  height: 40px;
+  resize: none;
   font-size: 0.9rem;
+  border-radius: 5px;
+  padding: 5px;
 }
 
-button.download-btn:hover,
-button.delete-btn:hover,
-button.like-btn:hover {
-  background-color: #b00;
+.comment-section button {
+  margin-top: 0.3rem;
 }
