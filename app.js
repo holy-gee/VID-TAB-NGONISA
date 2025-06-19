@@ -147,4 +147,4 @@ searchBox.oninput = () => loadVideos();
 categoryFilter.onchange = () => loadVideos();
 
 // Initial load
-loadVideos();
+loadVideos(); 
