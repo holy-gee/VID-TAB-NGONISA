@@ -2,64 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Takunda's Code Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ngonisa Shop & Chat</title>
   <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#c00" />
 </head>
 <body>
+
   <header>
-    <h1>Takunda's Code Shop</h1>
+    <h1>Ngonisa Shop & Chat</h1>
     <nav>
-      <button onclick="showPage('shop')">Shop</button>
-      <button onclick="showPage('chat')">Group Chat</button>
-      <button onclick="showPage('ads')">Adverts</button>
-      <button onclick="showPage('buy')">Buy Codes</button>
+      <button id="nav-shop" class="nav-btn active">Shop</button>
+      <button id="nav-chat" class="nav-btn">Group Chat</button>
+      <button id="nav-adverts" class="nav-btn">Advertisements</button>
+      <button id="nav-buy" class="nav-btn">Buy Codes</button>
     </nav>
   </header>
 
   <main>
-    <!-- Shop Page -->
-    <section id="shop" class="page active">
-      <h2>Shop Our Codes</h2>
-      <p>Explore HTML, CSS, and JS projects created by Takunda.</p>
-      <!-- Add your content here -->
+    <!-- SHOP PAGE -->
+    <section id="page-shop" class="page active">
+      <h2>Shop Pricing</h2>
+      <ul>
+        <li><strong>1 - Chatting platform</strong> = $5</li>
+        <li><strong>2 - 3D game designs</strong> = $7</li>
+        <li><strong>3 - All others</strong> we negotiate at <a href="mailto:takundangonisa7@gmail.com">takundangonisa7@gmail.com</a></li>
+      </ul>
     </section>
 
-    <!-- Group Chat Page -->
-    <section id="chat" class="page">
+    <!-- CHAT PAGE -->
+    <section id="page-chat" class="page">
       <h2>Group Chat</h2>
-      <div id="messages"></div>
-      <input type="text" id="chat-username" placeholder="Your name">
-      <input type="text" id="chat-message" placeholder="Your message">
-      <button onclick="sendMessage()">Send</button>
+      <div id="chat-window"></div>
+      <input type="text" id="chat-username" placeholder="Enter your username" />
+      <input type="text" id="chat-message" placeholder="Type your message..." />
+      <button id="send-chat-btn">Send</button>
     </section>
 
-    <!-- Adverts Page -->
-    <section id="ads" class="page">
-      <h2>Code Advertisement</h2>
-      <div class="video-grid">
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ" frameborder="0" allowfullscreen></iframe>
-        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" allowfullscreen></iframe>
+    <!-- ADVERTS PAGE -->
+    <section id="page-adverts" class="page">
+      <h2>Advertisements</h2>
+      <div class="video-adverts">
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            title="YouTube video 1"
+            frameborder="0"
+            allowfullscreen
+            ></iframe>
+        </div>
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/tgbNymZ7vqY"
+            title="YouTube video 2"
+            frameborder="0"
+            allowfullscreen
+            ></iframe>
+        </div>
+        <div class="video-wrapper">
+          <iframe
+            src="https://www.youtube.com/embed/3JZ_D3ELwOQ"
+            title="YouTube video 3"
+            frameborder="0"
+            allowfullscreen
+            ></iframe>
+        </div>
       </div>
     </section>
 
-    <!-- Buy Codes Page -->
-    <section id="buy" class="page">
-      <h2>Buy My Codes</h2>
-      <p>To buy source codes or make requests, send a message below:</p>
-      <input type="text" id="buyer-name" placeholder="Your Name">
-      <input type="email" id="buyer-email" placeholder="Your Email">
-      <textarea id="buyer-message" placeholder="Your Message"></textarea>
-      <button onclick="sendBuyerMessage()">Send Message</button>
-      <p>Your message will be sent to: <strong>takundangonisa7@gmail.com</strong></p>
+    <!-- BUY CODES PAGE -->
+    <section id="page-buy" class="page">
+      <h2>Buy Codes</h2>
+      <p>To negotiate or buy codes, please contact me at:</p>
+      <p><a href="mailto:takundangonisa7@gmail.com" class="email-link">takundangonisa7@gmail.com</a></p>
+      <p>Send me an email with your inquiry and I will get back to you as soon as possible.</p>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Takunda Ngonisa. All rights reserved.</p>
-  </footer>
-
+  <script type="module" src="firebase-config.js"></script>
   <script type="module" src="app.js"></script>
 </body>
 </html>
