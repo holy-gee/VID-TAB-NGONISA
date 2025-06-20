@@ -1,155 +1,167 @@
-body {
+/* General Reset */
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
   background-color: #000;
   color: white;
+  padding: 10px;
 }
 
+/* Neon Header */
 header {
-  background-color: #111;
-  padding: 1rem;
   text-align: center;
-  border-bottom: 2px solid #ff0044;
-  box-shadow: 0 0 10px #ff0044;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  color: #ff0044;
-  text-shadow: 0 0 10px #ff0044;
-}
-
-header input,
-header select {
-  padding: 0.5rem;
-  margin: 0.5rem 0.3rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: none;
-  width: 160px;
-}
-
-#show-upload {
-  display: block;
-  margin: 1rem auto;
-  background-color: #ff0044;
-  color: white;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: 0 0 10px #ff0044;
-}
-
-#show-upload:hover {
-  background-color: #ff3366;
-}
-
-#upload-section {
-  display: none;
+  padding: 1rem;
   background-color: #111;
-  padding: 1rem;
-  border: 2px solid #ff0044;
-  margin: 1rem auto;
-  max-width: 500px;
-  box-shadow: 0 0 10px #ff0044;
+  border-bottom: 3px solid #c00;
 }
 
-#upload-section input,
-#upload-section select {
-  display: block;
-  width: 100%;
-  margin: 0.3rem 0;
-  padding: 0.6rem;
-  font-size: 1rem;
-  border-radius: 5px;
-  border: none;
+.neon {
+  font-size: 2rem;
+  color: #ff4444;
+  text-shadow: 0 0 5px #f00, 0 0 10px #f00, 0 0 15px #f00;
 }
 
-#upload-btn {
-  background-color: #ff0044;
-  color: white;
-  padding: 0.6rem;
-  width: 100%;
-  border: none;
-  border-radius: 5px;
-  margin-top: 0.5rem;
+.neon-sub {
+  font-size: 0.9rem;
+  color: #fff;
+  text-shadow: 0 0 3px #f00;
+  margin-top: 5px;
+}
+
+/* Tabs */
+nav {
+  margin-top: 10px;
+}
+
+.tab {
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 10px 15px;
+  margin: 0 5px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
-#upload-btn:hover {
-  background-color: #ff3366;
+.tab.active {
+  background-color: #ff0000;
+  color: white;
 }
 
-main {
-  padding: 1rem;
+/* Controls */
+.top-controls {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+input, select, button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #c00;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #ff0000;
+}
+
+/* Upload Form */
+#upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1rem;
+  background-color: #111;
+  padding: 15px;
+  border: 2px solid #c00;
+  border-radius: 10px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Video Cards */
+#videos-container,
+#saved-videos-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 15px;
   justify-content: center;
 }
 
 .video-card {
-  background-color: #111;
-  width: 300px;
-  padding: 0.7rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #ff0044;
+  background-color: #222;
+  border-radius: 10px;
+  width: 320px;
+  box-shadow: 0 0 10px #ff0000;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .video-thumb {
   width: 100%;
   height: 180px;
   object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 0.5rem;
 }
 
-.play-btn {
-  background-color: #00ffcc;
-  color: black;
-  padding: 0.4rem 0.8rem;
-  border: none;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.play-btn:hover {
-  background-color: #00dddd;
+.video-info {
+  padding: 10px;
 }
 
 .video-title {
-  font-size: 1rem;
-  font-weight: bold;
-  color: #ff0044;
-  margin: 0.3rem 0;
-  text-align: center;
-  text-shadow: 0 0 5px #ff0044;
+  font-size: 1.1rem;
+  color: #ff4444;
+  margin-bottom: 5px;
 }
 
-.video-uploader {
+.video-uploader,
+.video-category {
   font-size: 0.9rem;
-  color: #ccc;
-  margin-bottom: 0.5rem;
+  color: #aaa;
+  margin-bottom: 5px;
 }
 
-.download-btn {
-  text-decoration: none;
-  background-color: #00ff44;
-  color: black;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  font-weight: bold;
-  box-shadow: 0 0 6px #00ff44;
+.video-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
 }
 
-.download-btn:hover {
-  background-color: #33ff66;
+.video-actions button {
+  padding: 6px 10px;
+  font-size: 0.9rem;
+}
+
+/* Circular Download Indicator */
+.download-indicator {
+  width: 30px;
+  height: 30px;
+  border: 3px solid blue;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
