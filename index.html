@@ -2,56 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dhogo Productions</title>
   <link rel="stylesheet" href="style.css" />
-  <meta name="theme-color" content="#ff0044" />
 </head>
 <body>
-  <header class="neon-header">
-    <h1>Dhogo Productions password = dhogo the boss</h1>
+  <header>
+    <h1 class="neon">Dhogo Productions</h1>
+    <p class="neon-sub">Password = dhogo the boss</p>
     <nav>
       <button id="online-tab" class="tab active">Online</button>
       <button id="offline-tab" class="tab">Downloads</button>
     </nav>
   </header>
 
-  <!-- Search and filter -->
-  <section id="search-bar">
-    <input type="text" id="search-input" placeholder="Search videos..." />
-    <select id="category-filter">
-      <option value="All">All</option>
-      <option value="Kids">Kids</option>
-      <option value="Songs">Songs</option>
-      <option value="Learning">Learning</option>
-      <option value="Movies">Movies</option>
-    </select>
-    <button id="search-btn">Search</button>
-  </section>
+  <main>
+    <section id="online-section">
+      <div class="top-controls">
+        <input type="text" id="search-input" placeholder="Search videos..." />
+        <button id="search-btn">Search</button>
+        <button id="toggle-upload">Upload</button>
+      </div>
 
-  <!-- Upload hidden initially -->
-  <button id="show-upload-btn">Upload Video</button>
-  <section id="upload-section" style="display: none;">
-    <h2>Upload a Video</h2>
-    <input type="password" id="upload-password" placeholder="Enter password" />
-    <input type="text" id="username-input" placeholder="Your Username" />
-    <input type="text" id="video-url" placeholder="Video URL" />
-    <input type="text" id="thumbnail-url" placeholder="Thumbnail URL" />
-    <input type="text" id="video-title" placeholder="Video Title" />
-    <select id="video-category">
-      <option value="Kids">Kids</option>
-      <option value="Songs">Songs</option>
-      <option value="Learning">Learning</option>
-      <option value="Movies">Movies</option>
-    </select>
-    <button id="upload-btn">Upload</button>
-  </section>
+      <div id="upload-section" class="hidden">
+        <input type="password" id="upload-password" placeholder="Enter password" />
+        <input type="text" id="username" placeholder="Your Username" />
+        <input type="text" id="video-url" placeholder="Video URL" />
+        <input type="text" id="thumbnail-url" placeholder="Thumbnail URL" />
+        <input type="text" id="video-title" placeholder="Video Title" />
+        <select id="video-category">
+          <option value="All">All</option>
+          <option value="Movies">Movies</option>
+          <option value="Music">Music</option>
+          <option value="Kids">Kids</option>
+          <option value="Learning">Learning</option>
+        </select>
+        <button id="upload-btn">Upload Video</button>
+      </div>
 
-  <!-- Video list -->
-  <main id="videos-container"></main>
+      <div id="videos-container"></div>
+    </section>
 
-  <!-- Firebase and logic -->
-  <script type="module" src="firebase-config.js"></script>
+    <section id="offline-section" class="hidden">
+      <h2>Saved Videos</h2>
+      <div id="saved-videos-container"></div>
+    </section>
+  </main>
+
+  <!-- Firebase Config -->
+  <script type="module" src="firebase-app.js"></script>
+  <!-- Main Script -->
   <script type="module" src="app.js"></script>
 </body>
 </html>
