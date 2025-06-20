@@ -39,8 +39,7 @@ button:hover {
   background-color: #b00;
 }
 
-#upload-section,
-#search-section {
+#upload-section, #search-section {
   margin: 1rem 0;
   display: flex;
   flex-wrap: wrap;
@@ -48,8 +47,7 @@ button:hover {
   align-items: center;
 }
 
-#upload-section input,
-#upload-section select {
+#upload-section input, #upload-section select {
   flex: 1 1 100%;
 }
 
@@ -57,8 +55,7 @@ button:hover {
   flex: 1 1 60%;
 }
 
-#search-section button,
-#search-section select {
+#search-section button, #search-section select {
   flex: 1 1 18%;
   min-width: 120px;
 }
@@ -80,11 +77,12 @@ button:hover {
   flex-direction: column;
 }
 
-.video-thumb {
+.video-thumb, iframe, video {
   width: 100%;
   height: 170px;
-  object-fit: cover;
   border-radius: 6px;
+  object-fit: cover;
+  background-color: black;
 }
 
 .video-title {
@@ -108,13 +106,10 @@ button:hover {
   margin-top: 0.5rem;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.4rem;
+  align-items: center;
 }
 
-.like-btn,
-.download-btn,
-.play-btn {
+.like-btn, .download-btn, .play-btn {
   background-color: #900;
   border: none;
   color: white;
@@ -122,33 +117,33 @@ button:hover {
   cursor: pointer;
   border-radius: 4px;
   font-size: 0.9rem;
+  margin-left: 0.3rem;
+  transition: background-color 0.3s ease;
 }
 
-.like-btn:hover,
-.download-btn:hover,
-.play-btn:hover {
+.like-btn:hover, .download-btn:hover, .play-btn:hover {
   background-color: #b00;
 }
 
-/* Downloaded message */
-#download-message {
-  animation: fadeinout 3s ease-in-out forwards;
+/* Download status circle */
+.download-status {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 3px solid #c00;
+  border-top: 3px solid #ff4444;
+  animation: spin 1s linear infinite;
+  margin-left: 0.5rem;
+  display: inline-block;
 }
 
-@keyframes fadeinout {
-  0% {
-    opacity: 0;
-    bottom: 0;
-  }
-  10% {
-    opacity: 1;
-    bottom: 20px;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    bottom: 0;
-  }
+.download-success {
+  border: 3px solid #0c0;
+  border-top: 3px solid #6f6;
+  animation: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
 }
