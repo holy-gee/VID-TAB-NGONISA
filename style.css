@@ -1,100 +1,63 @@
 body {
-  font-family: Arial, sans-serif;
-  background-color: #000;
+  background: black;
   color: white;
+  font-family: sans-serif;
   margin: 0;
-  padding: 0 1rem;
+  padding: 0;
 }
 
 header {
-  background-color: #ff0033;
+  background: #c00;
   padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  text-align: center;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 1.8rem;
-  text-shadow: 0 0 10px #fff;
-}
-
-input, select, button {
-  padding: 0.5rem;
-  margin: 0.3rem 0;
-  border-radius: 4px;
+nav button {
+  background: #111;
+  color: cyan;
   border: none;
-  font-size: 1rem;
-}
-
-button {
-  background-color: #c00;
-  color: white;
+  padding: 0.5rem 1rem;
+  margin: 0.2rem;
+  border-radius: 10px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #e00;
+#upload-section input, #upload-section button {
+  display: block;
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  width: 90%;
+  max-width: 400px;
 }
 
-#upload-section, #search-section {
-  margin: 1rem 0;
+#video-list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-}
-
-#videos-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem;
 }
 
 .video-card {
-  background-color: #111;
-  padding: 0.5rem;
-  width: 300px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px #ff0044;
+  background: #111;
+  border: 2px solid #0ff;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
 }
 
-.video-thumb {
+.video-card img, .video-card iframe, .video-card video {
   width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 6px;
+  border-radius: 10px;
 }
 
-.video-title {
-  font-weight: bold;
-  margin-top: 0.5rem;
-  font-size: 1.1rem;
-  color: #ff4444;
-}
-
-.video-category, .video-uploader {
-  font-size: 0.9rem;
-  color: #aaa;
-}
-
-.video-controls {
-  margin-top: 0.5rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.like-btn, .download-btn {
-  background-color: #900;
+.video-card button {
+  background: red;
   color: white;
-  padding: 0.4rem 0.8rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.like-btn:hover, .download-btn:hover {
-  background-color: #c00;
+  padding: 0.5rem;
+  margin: 0.3rem;
+  border: none;
+  border-radius: 5px;
 }
