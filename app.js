@@ -257,13 +257,6 @@ function createVideoCard(video) {
     downloadBtn.download = "";
     downloadBtn.textContent = "Download";
     downloadBtn.target = "_blank";
-
-    // Add download animation on click
-    downloadBtn.onclick = (e) => {
-      // show a visual feedback or progress if needed here
-      // Currently browser handles download
-    };
-
     controls.appendChild(downloadBtn);
   }
 
