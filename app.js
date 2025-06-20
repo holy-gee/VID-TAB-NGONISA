@@ -40,4 +40,4 @@ export {
   where,
   orderBy,
   Timestamp
-};
+}; 
