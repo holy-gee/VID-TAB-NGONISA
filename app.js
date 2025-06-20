@@ -382,25 +382,3 @@ categoryFilter.onchange = () => {
 
 // Initial load
 loadAndRenderVideos();
-
-import {
-  getDocs,
-  collection,
-  deleteDoc,
-  doc
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-// WARNING: Run this only when you want to clear all videos!
-async function deleteAllVideos() {
-  const querySnapshot = await getDocs(collection(db, "videos"));
-  const deletePromises = [];
-  querySnapshot.forEach((document) => {
-    deletePromises.push(deleteDoc(doc(db, "videos", document.id)));
-  });
-  await Promise.all(deletePromises);
-  alert("All videos have been deleted.");
-  loadAndRenderVideos(); // Refresh the UI
-}
-
-// ⚠️ Uncomment and run this only ONCE
-// deleteAllVideos();
