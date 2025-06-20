@@ -1,20 +1,8 @@
-// Firebase configuration and initialization
+// firebase-config.js
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  updateDoc,
-  doc,
-  query,
-  where,
-  orderBy,
-  Timestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// Your Firebase config
+// Your Firebase project configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBPdGAZT_U8xNBsU-S4NnC7WUQI8zM1LWI",
   authDomain: "vidfind-77a6a.firebaseapp.com",
@@ -22,22 +10,9 @@ const firebaseConfig = {
   storageBucket: "vidfind-77a6a.appspot.com",
   messagingSenderId: "813301438270",
   appId: "1:813301438270:web:2ebe4dec657167c5403e6f",
-  measurementId: "G-N4NTHY2230"
+  measurementId: "G-N4NTHY2230",
 };
 
+// Initialize Firebase and Firestore
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-export {
-  db,
-  collection,
-  addDoc,
-  getDocs,
-  deleteDoc,
-  updateDoc,
-  doc,
-  query,
-  where,
-  orderBy,
-  Timestamp
-};
+export const db = getFirestore(app);
