@@ -3,33 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dhogo Productions</title>
+  <title>Ngonisa Video App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>🔥 Dhogo Productions 🔥</h1>
-    <p style="color: #0ff;">Password = dhogo the boss</p>
-    <nav>
-      <button onclick="switchTab('online')">Online</button>
-      <button onclick="switchTab('downloads')">Downloads</button>
-    </nav>
-    <input type="text" id="search" placeholder="Search videos..." />
-    <button id="searchBtn">Search</button>
+    <h1>Dhogo Productions - password = dhogo the boss</h1>
+    <div id="login-section">
+      <input type="password" id="upload-password" placeholder="Enter password to upload" />
+      <button id="login-btn">Enter</button>
+    </div>
+    <div id="uploader-info" style="display:none;">
+      Upload enabled for: <span id="uploader-name"></span>
+      <button id="logout-btn">Logout</button>
+    </div>
   </header>
 
-  <section id="upload-section" style="display: none;">
-    <input type="password" id="upload-password" placeholder="Enter password" />
-    <input type="text" id="username" placeholder="Your name" />
+  <nav>
+    <button onclick="showPage('online')">Online</button>
+    <button onclick="showPage('offline')">Downloads</button>
+  </nav>
+
+  <section id="upload-section" style="display:none;">
+    <h2>Upload Video</h2>
+    <input type="text" id="username-input" placeholder="Your username" />
     <input type="text" id="video-url" placeholder="Video URL" />
     <input type="text" id="thumbnail-url" placeholder="Thumbnail URL" />
-    <input type="text" id="title" placeholder="Title" />
-    <button id="uploadBtn">Upload Video</button>
+    <input type="text" id="video-title" placeholder="Video Title" />
+    <select id="video-category">
+      <option value="All">All</option>
+      <option value="Music">Music</option>
+      <option value="Movies">Movies</option>
+      <option value="Kids">Kids</option>
+      <option value="Learning">Learning</option>
+    </select>
+    <button id="upload-btn">Upload</button>
   </section>
 
-  <button id="toggle-upload">Upload</button>
+  <section id="search-section">
+    <input type="text" id="search-input" placeholder="Search videos..." />
+    <button id="search-btn">Search</button>
+    <select id="category-filter">
+      <option value="All">All</option>
+      <option value="Music">Music</option>
+      <option value="Movies">Movies</option>
+      <option value="Kids">Kids</option>
+      <option value="Learning">Learning</option>
+    </select>
+  </section>
 
-  <main id="video-list"></main>
+  <main id="videos-container"></main>
 
   <script type="module" src="app.js"></script>
 </body>
