@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ngonisa Video App (Firestore)</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ngonisa Video App (Firestore)</title>
+<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
 <header>
   <h1>Ngonisa Video App</h1>
   <div id="login-section">
@@ -23,7 +22,7 @@
 <section id="upload-section" style="display:none;">
   <h2>Upload Video</h2>
   <input type="text" id="username-input" placeholder="Your username" /><br /><br />
-  <input type="text" id="video-url" placeholder="Video URL (YouTube or direct link)" /><br /><br />
+  <input type="text" id="video-url" placeholder="Pexels Video URL (e.g. https://www.pexels.com/video/beautiful-scenery-854587/)" /><br /><br />
   <input type="text" id="thumbnail-url" placeholder="Thumbnail image URL (optional)" /><br /><br />
   <input type="text" id="video-title" placeholder="Video Title" /><br /><br />
   <select id="video-category">
@@ -49,11 +48,6 @@
 </section>
 
 <main id="videos-container"></main>
-
-<!-- Download complete message -->
-<div id="download-message" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0c0; padding:1rem 2rem; border-radius:8px; color:white; font-weight:bold; z-index:999;">
-  Downloaded to your files!
-</div>
 
 <script type="module" src="app.js"></script>
 </body>
