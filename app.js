@@ -9,7 +9,6 @@ import {
   updateDoc,
   doc,
   where,
-  deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -19,6 +18,7 @@ const firebaseConfig = {
   storageBucket: "vidfind-77a6a.appspot.com",
   messagingSenderId: "813301438270",
   appId: "1:813301438270:web:2ebe4dec657167c5403e6f",
+  measurementId: "G-N4NTHY2230",
 };
 
 const PASSWORD = "dhogotheboss";
@@ -26,6 +26,8 @@ const PASSWORD = "dhogotheboss";
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// DOM references
+const loginSection = document.getElementById("login-section");
 const loginBtn = document.getElementById("login-btn");
 const uploadSection = document.getElementById("upload-section");
 const uploaderInfo = document.getElementById("uploader-info");
@@ -45,12 +47,14 @@ const categoryFilter = document.getElementById("category-filter");
 const videosContainer = document.getElementById("videos-container");
 
 let loggedIn = false;
+let currentUploader = "";
 
+// Login
 loginBtn.onclick = () => {
   const pass = document.getElementById("upload-password").value;
   if (pass === PASSWORD) {
     loggedIn = true;
-    document.getElementById("login-section").style.display = "none";
+    loginSection.style.display = "none";
     uploadSection.style.display = "flex";
     uploaderInfo.style.display = "block";
   } else {
@@ -58,18 +62,18 @@ loginBtn.onclick = () => {
   }
 };
 
+// Logout
 logoutBtn.onclick = () => {
   loggedIn = false;
   uploadSection.style.display = "none";
   uploaderInfo.style.display = "none";
-  document.getElementById("login-section").style.display = "flex";
+  loginSection.style.display = "flex";
+  currentUploader = "";
 };
 
+// Upload video
 uploadBtn.onclick = async () => {
-  if (!loggedIn) {
-    alert("You must enter the password to upload.");
-    return;
-  }
+  if (!loggedIn) return alert("Enter password to upload");
 
   const username = usernameInput.value.trim();
   const videoUrl = videoUrlInput.value.trim();
@@ -78,10 +82,11 @@ uploadBtn.onclick = async () => {
   const category = videoCategorySelect.value;
 
   if (!username || !videoUrl || !title) {
-    alert("Please fill in username, video URL, and title.");
+    alert("Fill username, video URL and title.");
     return;
   }
 
+  currentUploader = username;
   uploaderNameSpan.textContent = username;
 
   try {
@@ -101,16 +106,18 @@ uploadBtn.onclick = async () => {
     videoTitleInput.value = "";
     videoCategorySelect.value = "All";
 
-    alert("Video uploaded successfully!");
+    alert("✅ Video uploaded!");
     await loadAndRenderVideos();
   } catch (err) {
-    console.error("Error uploading video:", err);
-    alert("Failed to upload video.");
+    alert("❌ Upload failed");
+    console.error(err);
   }
 };
 
+// Convert YouTube link to embed
 function convertYoutubeToEmbed(url) {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+  const regExp =
+    /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
   const match = url.match(regExp);
   if (match && match[2].length === 11) {
     return "https://www.youtube.com/embed/" + match[2];
@@ -118,12 +125,17 @@ function convertYoutubeToEmbed(url) {
   return url;
 }
 
+// Load and render all videos
 async function loadAndRenderVideos(searchTerm = "", category = "All") {
-  videosContainer.innerHTML = "<p>Loading videos...</p>";
+  videosContainer.innerHTML = "<p>Loading...</p>";
 
   let q = query(collection(db, "videos"), orderBy("createdAt", "desc"));
   if (category !== "All") {
-    q = query(collection(db, "videos"), where("category", "==", category), orderBy("createdAt", "desc"));
+    q = query(
+      collection(db, "videos"),
+      where("category", "==", category),
+      orderBy("createdAt", "desc")
+    );
   }
 
   try {
@@ -138,29 +150,28 @@ async function loadAndRenderVideos(searchTerm = "", category = "All") {
     let filtered = videos;
     if (searchTerm.trim()) {
       const term = searchTerm.toLowerCase();
-      filtered = videos.filter((v) =>
-        v.title.toLowerCase().includes(term) ||
-        v.category.toLowerCase().includes(term) ||
-        (v.username && v.username.toLowerCase().includes(term))
+      filtered = videos.filter(
+        (v) =>
+          v.title.toLowerCase().includes(term) ||
+          v.category.toLowerCase().includes(term) ||
+          (v.username && v.username.toLowerCase().includes(term))
       );
     }
 
-    if (filtered.length === 0) {
-      videosContainer.innerHTML = "<p>No videos found.</p>";
-      return;
-    }
+    videosContainer.innerHTML =
+      filtered.length === 0 ? "<p>No videos found.</p>" : "";
 
-    videosContainer.innerHTML = "";
     filtered.forEach((video) => {
       const card = createVideoCard(video);
       videosContainer.appendChild(card);
     });
   } catch (err) {
-    console.error("Error loading videos:", err);
+    console.error("Error loading:", err);
     videosContainer.innerHTML = "<p>Failed to load videos.</p>";
   }
 }
 
+// Create video card
 function createVideoCard(video) {
   const div = document.createElement("div");
   div.className = "video-card";
@@ -205,6 +216,7 @@ function createVideoCard(video) {
   category.textContent = "Category: " + video.category;
   div.appendChild(category);
 
+  // Controls
   const controls = document.createElement("div");
   controls.className = "video-controls";
 
@@ -216,40 +228,44 @@ function createVideoCard(video) {
     likeBtn.textContent = `Like (${newCount})`;
     try {
       await updateDoc(doc(db, "videos", video.id), { likesCount: newCount });
-      video.likesCount = newCount;
     } catch (err) {
-      console.error("Failed to update likes:", err);
-      alert("Failed to like video.");
+      alert("Failed to like");
     }
   };
   controls.appendChild(likeBtn);
 
+  // Play button
+  const playBtn = document.createElement("button");
+  playBtn.className = "like-btn";
+  playBtn.textContent = "▶ Play";
+  playBtn.onclick = () => {
+    window.open(video.videoUrl, "_blank");
+  };
+  controls.appendChild(playBtn);
+
+  // Download button
   if (
     !video.videoUrl.includes("youtube.com") &&
-    !video.videoUrl.includes("youtu.be") &&
-    video.videoUrl.match(/^https?:\/\//)
+    !video.videoUrl.includes("youtu.be")
   ) {
-    const downloadBtn = document.createElement("button");
+    const downloadBtn = document.createElement("a");
     downloadBtn.className = "download-btn";
-    downloadBtn.textContent = "⬇ Downloading...";
+    downloadBtn.href = video.videoUrl;
+    downloadBtn.download = "";
+    downloadBtn.textContent = "⬇ Download";
     downloadBtn.onclick = () => {
-      const a = document.createElement("a");
-      a.href = video.videoUrl;
-      a.download = "video";
-      a.style.display = "none";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      downloadBtn.textContent = "Downloaded ✅";
+      setTimeout(() => {
+        alert("✅ Downloaded to your files");
+      }, 3000); // Wait a bit for download to start
     };
     controls.appendChild(downloadBtn);
   }
 
   div.appendChild(controls);
-
   return div;
 }
 
+// Events
 searchBtn.onclick = () => {
   const term = searchInput.value.trim();
   const cat = categoryFilter.value;
@@ -262,4 +278,5 @@ categoryFilter.onchange = () => {
   loadAndRenderVideos(term, cat);
 };
 
+// Initial load
 loadAndRenderVideos();
