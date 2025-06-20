@@ -1,230 +1,180 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
-  getFirestore,
   collection,
   addDoc,
   getDocs,
+  updateDoc,
+  deleteDoc,
+  doc,
   query,
   orderBy,
-  updateDoc,
-  doc,
   where,
-  deleteDoc,
+  Timestamp
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBPdGAZT_U8xNBsU-S4NnC7WUQI8zM1LWI",
-  authDomain: "vidfind-77a6a.firebaseapp.com",
-  projectId: "vidfind-77a6a",
-  storageBucket: "vidfind-77a6a.appspot.com",
-  messagingSenderId: "813301438270",
-  appId: "1:813301438270:web:2ebe4dec657167c5403e6f",
-};
+import { db } from './firebase-config.js';
 
 const PASSWORD = "dhogotheboss";
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+let currentUser = null;
 
-// Elements
-const tabs = document.querySelectorAll(".tab");
-const sections = {
-  online: document.getElementById("online-section"),
-  offline: document.getElementById("offline-section"),
-};
+// DOM Elements
 const uploadBtn = document.getElementById("upload-btn");
-const toggleUpload = document.getElementById("toggle-upload");
-const uploadSection = document.getElementById("upload-section");
-const videosContainer = document.getElementById("videos-container");
-const searchInput = document.getElementById("search");
+const uploadForm = document.getElementById("upload-form");
+const toggleUploadBtn = document.getElementById("toggle-upload-btn");
+const searchBox = document.getElementById("search-box");
 const categoryFilter = document.getElementById("category-filter");
+const videoList = document.getElementById("video-list");
 
-let currentUploader = "";
-
-// Show correct tab
-tabs.forEach(tab => {
-  tab.onclick = () => {
-    tabs.forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
-    Object.values(sections).forEach(sec => sec.classList.add("hidden"));
-    sections[tab.dataset.tab].classList.remove("hidden");
-    if (tab.dataset.tab === "online") loadVideos();
-    if (tab.dataset.tab === "offline") loadSavedVideos();
-  };
-});
-
-toggleUpload.onclick = () => {
-  uploadSection.classList.toggle("hidden");
+// Toggle Upload Form
+toggleUploadBtn.onclick = () => {
+  const pass = prompt("Enter upload password:");
+  if (pass === PASSWORD) {
+    uploadForm.style.display = uploadForm.style.display === "block" ? "none" : "block";
+  } else {
+    alert("Incorrect password!");
+  }
 };
 
+// Upload Video
 uploadBtn.onclick = async () => {
-  const pass = document.getElementById("password").value.trim();
   const username = document.getElementById("username").value.trim();
   const videoUrl = document.getElementById("video-url").value.trim();
-  const thumbUrl = document.getElementById("thumb-url").value.trim();
+  const thumbnailUrl = document.getElementById("thumbnail-url").value.trim();
   const title = document.getElementById("title").value.trim();
-  const category = document.getElementById("category").value;
+  const category = document.getElementById("upload-category").value;
 
-  if (pass !== PASSWORD) return alert("Wrong password!");
-  if (!username || !videoUrl || !title) return alert("Fill all required fields.");
+  if (!username || !videoUrl || !title) {
+    alert("Please fill in username, video URL, and title.");
+    return;
+  }
 
-  await addDoc(collection(db, "videos"), {
-    username,
-    videoUrl,
-    thumbUrl,
-    title,
-    category,
-    likes: 0,
-    subs: 0,
-    comments: [],
-    createdAt: new Date(),
-  });
-
-  alert("Video uploaded!");
-  uploadSection.classList.add("hidden");
-  loadVideos();
+  try {
+    await addDoc(collection(db, "videos"), {
+      username,
+      videoUrl,
+      thumbnailUrl,
+      title,
+      category,
+      likes: 0,
+      subscribers: 0,
+      comments: [],
+      createdAt: Timestamp.now()
+    });
+    alert("Video uploaded successfully!");
+    loadVideos();
+  } catch (e) {
+    console.error("Upload failed:", e);
+    alert("Error uploading video.");
+  }
 };
 
-searchInput.oninput = () => {
-  loadVideos();
-};
+// Load Videos
+async function loadVideos(searchTerm = "", category = "All") {
+  videoList.innerHTML = "<p>Loading videos...</p>";
 
-categoryFilter.onchange = () => {
-  loadVideos();
-};
-
-async function loadVideos() {
-  videosContainer.innerHTML = "<p>Loading...</p>";
   let q = query(collection(db, "videos"), orderBy("createdAt", "desc"));
   const querySnapshot = await getDocs(q);
-
   let videos = [];
-  querySnapshot.forEach(doc => {
-    const data = doc.data();
-    data.id = doc.id;
+
+  querySnapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    data.id = docSnap.id;
     videos.push(data);
   });
 
-  const searchTerm = searchInput.value.toLowerCase();
-  const category = categoryFilter.value;
+  // Filter
+  if (searchTerm) {
+    const term = searchTerm.toLowerCase();
+    videos = videos.filter(v =>
+      v.title.toLowerCase().includes(term) ||
+      v.username.toLowerCase().includes(term) ||
+      v.category.toLowerCase().includes(term)
+    );
+  }
 
   if (category !== "All") {
     videos = videos.filter(v => v.category === category);
   }
 
-  if (searchTerm) {
-    videos = videos.filter(
-      v =>
-        v.title.toLowerCase().includes(searchTerm) ||
-        v.username.toLowerCase().includes(searchTerm)
-    );
-  }
-
+  // Render
   if (videos.length === 0) {
-    videosContainer.innerHTML = "<p>No videos found.</p>";
-    return;
+    videoList.innerHTML = "<p>No videos found.</p>";
+  } else {
+    videoList.innerHTML = "";
+    videos.forEach(renderVideo);
   }
-
-  videosContainer.innerHTML = "";
-  videos.forEach(renderVideo);
 }
 
 function renderVideo(video) {
-  const card = document.createElement("div");
-  card.className = "video-card";
+  const div = document.createElement("div");
+  div.className = "video-card";
+
+  const title = document.createElement("h3");
+  title.textContent = video.title;
+
+  const uploader = document.createElement("p");
+  uploader.textContent = `By ${video.username}`;
 
   const thumb = document.createElement("img");
-  thumb.className = "video-thumb";
-  thumb.src = video.thumbUrl;
-  card.appendChild(thumb);
+  thumb.src = video.thumbnailUrl || "https://via.placeholder.com/320x180.png?text=No+Thumbnail";
 
-  const info = document.createElement("div");
-  info.className = "video-info";
-
-  const title = document.createElement("div");
-  title.className = "video-title";
-  title.textContent = video.title;
-  info.appendChild(title);
-
-  const uploader = document.createElement("div");
-  uploader.className = "video-uploader";
-  uploader.textContent = `By: ${video.username}`;
-  info.appendChild(uploader);
-
-  const category = document.createElement("div");
-  category.className = "video-category";
-  category.textContent = `Category: ${video.category}`;
-  info.appendChild(category);
-
-  const actions = document.createElement("div");
-  actions.className = "video-actions";
+  const iframe = document.createElement("iframe");
+  iframe.src = convertYoutube(video.videoUrl);
+  iframe.width = "100%";
+  iframe.height = "180";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+  iframe.allowFullscreen = true;
 
   const likeBtn = document.createElement("button");
-  likeBtn.textContent = `❤️ Like (${video.likes})`;
+  likeBtn.textContent = `👍 Like (${video.likes || 0})`;
   likeBtn.onclick = async () => {
-    const ref = doc(db, "videos", video.id);
-    await updateDoc(ref, { likes: video.likes + 1 });
-    loadVideos();
+    const newCount = (video.likes || 0) + 1;
+    await updateDoc(doc(db, "videos", video.id), { likes: newCount });
+    likeBtn.textContent = `👍 Like (${newCount})`;
   };
 
   const subBtn = document.createElement("button");
-  subBtn.textContent = `🔔 Subscribe (${video.subs})`;
+  subBtn.textContent = `🔔 Subscribe (${video.subscribers || 0})`;
   subBtn.onclick = async () => {
-    const ref = doc(db, "videos", video.id);
-    await updateDoc(ref, { subs: video.subs + 1 });
-    loadVideos();
+    const newSub = (video.subscribers || 0) + 1;
+    await updateDoc(doc(db, "videos", video.id), { subscribers: newSub });
+    subBtn.textContent = `🔔 Subscribe (${newSub})`;
   };
 
+  const commentInput = document.createElement("input");
+  commentInput.placeholder = "Add a comment...";
   const commentBtn = document.createElement("button");
   commentBtn.textContent = "💬 Comment";
-  commentBtn.onclick = () => {
-    const comment = prompt("Write your comment:");
-    if (comment) {
-      const ref = doc(db, "videos", video.id);
-      updateDoc(ref, {
-        comments: [...(video.comments || []), comment],
-      });
-    }
+  commentBtn.onclick = async () => {
+    const comment = commentInput.value.trim();
+    if (!comment) return;
+    const updatedComments = [...(video.comments || []), comment];
+    await updateDoc(doc(db, "videos", video.id), { comments: updatedComments });
+    commentInput.value = "";
+    alert("Comment added.");
   };
 
-  const playBtn = document.createElement("button");
-  playBtn.textContent = "▶️ Play";
-  playBtn.onclick = () => {
-    const player = document.createElement("video");
-    player.controls = true;
-    player.src = video.videoUrl;
-    player.style.width = "100%";
-    card.innerHTML = "";
-    card.appendChild(player);
-  };
-
-  const downloadBtn = document.createElement("button");
+  const downloadBtn = document.createElement("a");
   downloadBtn.textContent = "⬇️ Download";
-  downloadBtn.onclick = () => {
-    const indicator = document.createElement("div");
-    indicator.className = "download-indicator";
-    card.appendChild(indicator);
+  downloadBtn.href = video.videoUrl;
+  downloadBtn.download = "";
+  downloadBtn.target = "_blank";
 
-    const link = document.createElement("a");
-    link.href = video.videoUrl;
-    link.download = "";
-    link.style.display = "none";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    card.removeChild(indicator);
-  };
-
-  actions.append(likeBtn, subBtn, commentBtn, playBtn, downloadBtn);
-  info.appendChild(actions);
-  card.appendChild(info);
-  videosContainer.appendChild(card);
+  div.append(title, uploader, iframe, likeBtn, subBtn, commentInput, commentBtn, downloadBtn);
+  videoList.appendChild(div);
 }
 
-// Offline support (if required in future)
-function loadSavedVideos() {
-  const container = document.getElementById("saved-videos-container");
-  container.innerHTML = "<p>Saved videos will appear here (not yet implemented).</p>";
+// Convert YouTube link to embed
+function convertYoutube(url) {
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/);
+  return match ? `https://www.youtube.com/embed/${match[1]}` : url;
 }
 
-// Load first time
+// Event Listeners
+searchBox.oninput = () => {
+  loadVideos(searchBox.value, categoryFilter.value);
+};
+categoryFilter.onchange = () => {
+  loadVideos(searchBox.value, categoryFilter.value);
+};
+
+// Initial Load
 loadVideos();
