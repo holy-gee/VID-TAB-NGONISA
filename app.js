@@ -49,7 +49,7 @@ const videosContainer = document.getElementById("videos-container");
 let loggedIn = false;
 let currentUploader = "";
 
-// Login button event
+// Login
 loginBtn.onclick = () => {
   const pass = document.getElementById("upload-password").value;
   if (pass === PASSWORD) {
@@ -63,7 +63,7 @@ loginBtn.onclick = () => {
   }
 };
 
-// Logout button event
+// Logout
 logoutBtn.onclick = () => {
   loggedIn = false;
   uploadSection.style.display = "none";
@@ -72,7 +72,7 @@ logoutBtn.onclick = () => {
   currentUploader = "";
 };
 
-// Upload video button event
+// Upload video
 uploadBtn.onclick = async () => {
   if (!loggedIn) {
     alert("You must enter the password to upload.");
@@ -251,18 +251,119 @@ function createVideoCard(video) {
     !video.videoUrl.includes("youtu.be") &&
     video.videoUrl.match(/^https?:\/\//)
   ) {
-    const downloadBtn = document.createElement("a");
+    const downloadBtn = document.createElement("button");
     downloadBtn.className = "download-btn";
-    downloadBtn.href = video.videoUrl;
-    downloadBtn.download = "";
     downloadBtn.textContent = "Download";
-    downloadBtn.target = "_blank";
     controls.appendChild(downloadBtn);
+
+    // Download status indicator
+    const statusDiv = document.createElement("div");
+    statusDiv.className = "download-status";
+    statusDiv.style.display = "none";
+    controls.appendChild(statusDiv);
+
+    const outerCircle = document.createElement("div");
+    outerCircle.className = "outer-circle";
+    statusDiv.appendChild(outerCircle);
+
+    const progressCircle = document.createElement("div");
+    progressCircle.className = "progress-circle";
+    statusDiv.appendChild(progressCircle);
+
+    const fill = document.createElement("div");
+    fill.className = "fill";
+    progressCircle.appendChild(fill);
+
+    // Download button click event
+    downloadBtn.onclick = () => {
+      statusDiv.style.display = "inline-block";
+      downloadBtn.disabled = true;
+
+      downloadVideoWithProgress(video.videoUrl, fill)
+        .then(() => {
+          alert("Download completed!");
+          statusDiv.style.display = "none";
+          downloadBtn.disabled = false;
+        })
+        .catch((e) => {
+          alert("Download failed!");
+          console.error(e);
+          statusDiv.style.display = "none";
+          downloadBtn.disabled = false;
+        });
+    };
   }
 
   div.appendChild(controls);
 
   return div;
+}
+
+// Download video with progress animation & saving file
+async function downloadVideoWithProgress(url, fillElem) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error("Network response was not ok");
+
+      const contentLength = response.headers.get("content-length");
+      if (!contentLength) {
+        // No content-length header, just download directly
+        const blob = await response.blob();
+        saveBlob(blob, extractFilename(url));
+        resolve();
+        return;
+      }
+
+      const total = parseInt(contentLength, 10);
+      let loaded = 0;
+
+      const reader = response.body.getReader();
+      const chunks = [];
+
+      function updateProgress() {
+        const percent = loaded / total;
+        fillElem.style.transform = `rotate(${percent * 360}deg)`;
+      }
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        chunks.push(value);
+        loaded += value.length;
+        updateProgress();
+      }
+
+      const blob = new Blob(chunks);
+      saveBlob(blob, extractFilename(url));
+      resolve();
+    } catch (err) {
+      reject(err);
+    }
+  });
+}
+
+// Save Blob as file to user device
+function saveBlob(blob, filename) {
+  const a = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+// Extract filename from URL
+function extractFilename(url) {
+  try {
+    const pathname = new URL(url).pathname;
+    const name = pathname.substring(pathname.lastIndexOf("/") + 1);
+    return name || "downloaded_video";
+  } catch {
+    return "downloaded_video";
+  }
 }
 
 // Search button click
