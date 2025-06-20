@@ -1,13 +1,13 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #111;
+  background-color: #000;
   color: white;
   margin: 0;
   padding: 0 1rem;
 }
 
 header {
-  background-color: #c00;
+  background-color: #ff0033;
   padding: 1rem;
   display: flex;
   align-items: center;
@@ -17,7 +17,8 @@ header {
 
 header h1 {
   margin: 0;
-  flex-grow: 1;
+  font-size: 1.8rem;
+  text-shadow: 0 0 10px #fff;
 }
 
 input, select, button {
@@ -29,35 +30,20 @@ input, select, button {
 }
 
 button {
-  background-color: #900;
+  background-color: #c00;
   color: white;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #b00;
+  background-color: #e00;
 }
 
 #upload-section, #search-section {
   margin: 1rem 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-  align-items: center;
-}
-
-#upload-section input, #upload-section select {
-  flex: 1 1 100%;
-}
-
-#search-section input {
-  flex: 1 1 60%;
-}
-
-#search-section button, #search-section select {
-  flex: 1 1 18%;
-  min-width: 120px;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 #videos-container {
@@ -65,21 +51,20 @@ button:hover {
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 2rem;
+  justify-content: center;
 }
 
 .video-card {
-  background-color: #222;
+  background-color: #111;
   padding: 0.5rem;
   width: 300px;
   border-radius: 8px;
-  box-shadow: 0 0 10px #c00;
-  display: flex;
-  flex-direction: column;
+  box-shadow: 0 0 10px #ff0044;
 }
 
 .video-thumb {
   width: 100%;
-  height: 170px;
+  height: 180px;
   object-fit: cover;
   border-radius: 6px;
 }
@@ -91,33 +76,25 @@ button:hover {
   color: #ff4444;
 }
 
-.video-category {
+.video-category, .video-uploader {
   font-size: 0.9rem;
   color: #aaa;
-}
-
-.video-uploader {
-  font-size: 0.9rem;
-  color: #ccc;
 }
 
 .video-controls {
   margin-top: 0.5rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .like-btn, .download-btn {
   background-color: #900;
-  border: none;
   color: white;
-  padding: 0.3rem 0.8rem;
-  cursor: pointer;
+  padding: 0.4rem 0.8rem;
   border-radius: 4px;
-  font-size: 0.9rem;
+  cursor: pointer;
 }
 
 .like-btn:hover, .download-btn:hover {
-  background-color: #b00;
+  background-color: #c00;
 }
