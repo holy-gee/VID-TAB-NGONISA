@@ -68,6 +68,7 @@ button:hover {
 }
 
 .video-card {
+  position: relative;
   background-color: #222;
   padding: 0.5rem;
   width: 300px;
@@ -75,14 +76,15 @@ button:hover {
   box-shadow: 0 0 10px #c00;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-.video-thumb, iframe, video {
+.video-thumb {
   width: 100%;
   height: 170px;
-  border-radius: 6px;
   object-fit: cover;
-  background-color: black;
+  border-radius: 6px;
+  display: block;
 }
 
 .video-title {
@@ -109,7 +111,7 @@ button:hover {
   align-items: center;
 }
 
-.like-btn, .download-btn, .play-btn {
+.like-btn {
   background-color: #900;
   border: none;
   color: white;
@@ -117,33 +119,73 @@ button:hover {
   cursor: pointer;
   border-radius: 4px;
   font-size: 0.9rem;
-  margin-left: 0.3rem;
-  transition: background-color 0.3s ease;
 }
 
-.like-btn:hover, .download-btn:hover, .play-btn:hover {
+.like-btn:hover {
   background-color: #b00;
 }
 
-/* Download status circle */
-.download-status {
-  width: 24px;
-  height: 24px;
+/* ▶️ Play button center overlay */
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
   border-radius: 50%;
-  border: 3px solid #c00;
-  border-top: 3px solid #ff4444;
-  animation: spin 1s linear infinite;
-  margin-left: 0.5rem;
-  display: inline-block;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
 }
 
-.download-success {
-  border: 3px solid #0c0;
-  border-top: 3px solid #6f6;
-  animation: none;
+.play-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ⬇️ Download circular button bottom-right */
+.download-control {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: #900;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.download-control:hover {
+  background-color: #b00;
+}
+
+.download-progress {
+  background-color: #0077ff;
+  animation: spin 1s linear infinite;
+  border-radius: 50%;
+}
+
+.download-complete {
+  background-color: green;
+}
+
+.download-paused {
+  background-color: orange;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg);}
-  100% { transform: rotate(360deg);}
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
