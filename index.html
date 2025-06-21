@@ -3,61 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ngonisa Video App (Firestore)</title>
+  <title>Ngonisa Video App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <header>
+    <h1>Ngonisa Video App</h1>
+    <div id="login-section">
+      <input type="password" id="upload-password" placeholder="Enter password to upload" />
+      <button id="login-btn">Enter</button>
+    </div>
+    <div id="uploader-info" style="display:none;">
+      Upload enabled for: <span id="uploader-name"></span>
+      <button id="logout-btn">Logout</button>
+    </div>
+  </header>
 
-<header>
-  <h1>Ngonisa Video App</h1>
-  <div id="login-section">
-    <input type="password" id="upload-password" placeholder="Enter password to upload" />
-    <button id="login-btn">Enter</button>
-  </div>
-  <div id="uploader-info" style="display:none;">
-    Upload enabled for: <span id="uploader-name"></span>
-    <button id="logout-btn">Logout</button>
-  </div>
-</header>
+  <section id="upload-section" style="display:none;">
+    <h2>Upload Video</h2>
+    <input type="text" id="username-input" placeholder="Your username" /><br /><br />
+    <input type="text" id="video-url" placeholder="Video URL (YouTube or direct link)" /><br /><br />
+    <input type="text" id="thumbnail-url" placeholder="Thumbnail image URL (optional)" /><br /><br />
+    <input type="text" id="video-title" placeholder="Video Title" /><br /><br />
+    <select id="video-category">
+      <option value="All">All</option>
+      <option value="Music">Music</option>
+      <option value="Gaming">Gaming</option>
+      <option value="Education">Education</option>
+      <option value="Kids">Kids</option>
+    </select><br /><br />
+    <button id="upload-btn">Upload Video</button>
+  </section>
 
-<section id="upload-section" style="display:none;">
-  <h2>Upload Video</h2>
-  <input type="text" id="username-input" placeholder="Your username" /><br /><br />
-  <input type="text" id="video-url" placeholder="Video URL (YouTube or direct link)" /><br /><br />
-  <input type="text" id="thumbnail-url" placeholder="Thumbnail image URL (optional)" /><br /><br />
-  <input type="text" id="video-title" placeholder="Video Title" /><br /><br />
-  <select id="video-category">
-    <option value="All">All</option>
-    <option value="Music">Music</option>
-    <option value="Gaming">Gaming</option>
-    <option value="Education">Education</option>
-    <option value="Kids">Kids</option>
-  </select><br /><br />
-  <button id="upload-btn">Upload Video</button>
-</section>
+  <section id="search-section">
+    <input type="text" id="search-input" placeholder="Search videos..." />
+    <button id="search-btn">Search</button>
+    <select id="category-filter">
+      <option value="All">Filter by category</option>
+      <option value="Music">Music</option>
+      <option value="Gaming">Gaming</option>
+      <option value="Education">Education</option>
+      <option value="Kids">Kids</option>
+    </select>
+  </section>
 
-<section id="search-section">
-  <input type="text" id="search-input" placeholder="Search videos..." />
-  <button id="search-btn">Search</button>
-  <select id="category-filter">
-    <option value="All">Filter by category</option>
-    <option value="Music">Music</option>
-    <option value="Gaming">Gaming</option>
-    <option value="Education">Education</option>
-    <option value="Kids">Kids</option>
-  </select>
-</section>
+  <main id="videos-container"></main>
 
-<main id="videos-container"></main>
-
-<!-- Modal for playing video -->
-<div id="video-modal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" id="close-modal">&times;</span>
-    <video id="modal-video" controls autoplay style="width:100%; border-radius:8px;"></video>
-  </div>
-</div>
-
-<script type="module" src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
