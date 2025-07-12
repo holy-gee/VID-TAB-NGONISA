@@ -74,7 +74,7 @@ function renderVideos(videos) {
     const video = doc.data();
     const videoID = extractYouTubeID(video.videoURL);
 
-    if (!videoID) return;
+    if (!videoID) return; // Skip if no valid YouTube ID
 
     const container = document.createElement("div");
     container.className = "tiktok-video-container";
