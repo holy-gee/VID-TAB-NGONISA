@@ -46,8 +46,6 @@ uploadForm.addEventListener("submit", async (e) => {
       videoURL,
       thumbnailURL,
       timestamp: new Date(),
-      likes: 0,
-      subscriptions: 0,
     });
     uploadForm.reset();
   } catch (error) {
@@ -56,7 +54,14 @@ uploadForm.addEventListener("submit", async (e) => {
   }
 });
 
-// Render videos like TikTok
+// Extract YouTube video ID
+function extractYouTubeID(url) {
+  const regExp = /(?:youtube\.com.*(?:\?|&)v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  const match = url.match(regExp);
+  return match && match[1] ? match[1] : "";
+}
+
+// Render videos
 function renderVideos(videos) {
   videoList.innerHTML = "";
 
@@ -67,14 +72,25 @@ function renderVideos(videos) {
 
   videos.forEach((doc) => {
     const video = doc.data();
+    const videoID = extractYouTubeID(video.videoURL);
+
+    if (!videoID) return;
 
     const container = document.createElement("div");
     container.className = "tiktok-video-container";
 
     container.innerHTML = `
-      <video src="${video.videoURL}" class="tiktok-video" controls autoplay loop></video>
-      <div class="video-overlay">
-        <h3>${video.title}</h3>
+      <div class="iframe-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+          class="yt-iframe"
+        ></iframe>
+        <div class="video-overlay">
+          <h3>${video.title}</h3>
+        </div>
       </div>
     `;
 
@@ -82,7 +98,7 @@ function renderVideos(videos) {
   });
 }
 
-// Listen for videos (with search)
+// Listen for videos
 function listenForVideos(filter = "") {
   let q = query(videosCol, orderBy("timestamp", "desc"));
 
