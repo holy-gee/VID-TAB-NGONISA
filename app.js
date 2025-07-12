@@ -82,7 +82,8 @@ function renderVideos(videos) {
     container.innerHTML = `
       <div class="iframe-wrapper">
         <iframe
-          src="https://www.youtube.com/embed/${videoID}?autoplay=1&mute=1&loop=1&playlist=${videoID}"
+         
+src="https://www.youtube.com/embed/${videoID}?autoplay=1&loop=1&playlist=${videoID}"
           frameborder="0"
           allow="autoplay; encrypted-media"
           allowfullscreen
