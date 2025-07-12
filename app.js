@@ -162,11 +162,21 @@ function createVideoCard(docSnap) {
   const div = document.createElement("div");
   div.className = "video-card";
 
-  const iframe = document.createElement("iframe");
-  iframe.src = data.link.replace("watch?v=", "embed/");
-  iframe.frameborder = "0";
-  iframe.allowFullscreen = true;
-  div.appendChild(iframe);
+  // Thumbnail
+  const thumb = document.createElement("img");
+  thumb.className = "video-thumb";
+  thumb.src = `https://img.youtube.com/vi/${getYouTubeID(data.link)}/hqdefault.jpg`;
+  div.appendChild(thumb);
+
+  // Play button
+  const playBtn = document.createElement("button");
+  playBtn.className = "play-btn";
+  playBtn.textContent = "▶";
+  playBtn.onclick = () => {
+    thumb.outerHTML = `<iframe width="100%" height="170" src="${data.link.replace("watch?v=", "embed/")}" frameborder="0" allowfullscreen></iframe>`;
+    playBtn.remove();
+  };
+  div.appendChild(playBtn);
 
   const title = document.createElement("div");
   title.className = "video-title";
@@ -195,6 +205,12 @@ function createVideoCard(docSnap) {
   div.appendChild(likeBtn);
 
   return div;
+}
+
+function getYouTubeID(url) {
+  const regExp = /^.*(youtu.be\/|v\/|embed\/|watch\?v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
 }
 
 async function openShorts() {
