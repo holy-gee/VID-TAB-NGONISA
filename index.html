@@ -12,6 +12,33 @@
     <button id="shorts-btn">Shorts</button>
   </header>
 
+  <div id="login-section">
+    <input type="password" id="upload-password" placeholder="Enter password to upload" />
+    <button id="login-btn">Enter</button>
+  </div>
+
+  <div id="uploader-info" style="display:none;">
+    Upload enabled for: <span id="uploader-name"></span>
+    <button id="logout-btn">Logout</button>
+  </div>
+
+  <section id="upload-section" style="display:none;">
+    <h2>Upload Video</h2>
+    <input type="text" id="username-input" placeholder="Your username" /><br />
+    <input type="text" id="video-url" placeholder="YouTube URL" /><br />
+    <input type="text" id="video-title" placeholder="Video Title" /><br />
+    <select id="video-category">
+      <option value="Full">Full</option>
+      <option value="Shorts">Shorts</option>
+    </select><br />
+    <button id="upload-btn">Upload Video</button>
+  </section>
+
+  <section id="search-section">
+    <input type="text" id="search-input" placeholder="Search videos..." />
+    <button id="search-btn">Search</button>
+  </section>
+
   <main id="video-container"></main>
 
   <div id="shorts-player" style="display:none;">
