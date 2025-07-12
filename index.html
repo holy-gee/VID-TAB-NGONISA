@@ -2,35 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Ngonisa YouTube App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ngonisa Video App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Ngonisa YouTube App</h1>
-    <button id="full-btn">Full</button>
-    <button id="shorts-btn">Shorts</button>
+    <h1>Ngonisa Video App</h1>
+    <nav>
+      <button id="full-tab">Full</button>
+      <button id="shorts-tab">Shorts</button>
+    </nav>
+    <div id="login-section">
+      <input type="password" id="upload-password" placeholder="Enter password to upload" />
+      <button id="login-btn">Enter</button>
+    </div>
+    <div id="uploader-info" style="display:none;">
+      Upload enabled for: <span id="uploader-name"></span>
+      <button id="logout-btn">Logout</button>
+    </div>
   </header>
-
-  <div id="login-section">
-    <input type="password" id="upload-password" placeholder="Enter password to upload" />
-    <button id="login-btn">Enter</button>
-  </div>
-
-  <div id="uploader-info" style="display:none;">
-    Upload enabled for: <span id="uploader-name"></span>
-    <button id="logout-btn">Logout</button>
-  </div>
 
   <section id="upload-section" style="display:none;">
     <h2>Upload Video</h2>
-    <input type="text" id="username-input" placeholder="Your username" /><br />
-    <input type="text" id="video-url" placeholder="YouTube URL" /><br />
-    <input type="text" id="video-title" placeholder="Video Title" /><br />
+    <input type="text" id="username-input" placeholder="Your username" /><br /><br />
+    <input type="text" id="video-url" placeholder="YouTube video URL" /><br /><br />
+    <input type="text" id="thumbnail-url" placeholder="Thumbnail image URL" /><br /><br />
+    <input type="text" id="video-title" placeholder="Video Title" /><br /><br />
     <select id="video-category">
       <option value="Full">Full</option>
       <option value="Shorts">Shorts</option>
-    </select><br />
+    </select><br /><br />
     <button id="upload-btn">Upload Video</button>
   </section>
 
@@ -39,13 +41,12 @@
     <button id="search-btn">Search</button>
   </section>
 
-  <main id="video-container"></main>
+  <main id="videos-container"></main>
 
-  <div id="shorts-player" style="display:none;">
-    <iframe id="shorts-iframe" src="" frameborder="0" allowfullscreen></iframe>
-    <button id="prev-short">⬅️ Prev</button>
-    <button id="next-short">Next ➡️</button>
-    <button id="close-short">Close ✖️</button>
+  <div id="shorts-viewer" style="display:none;">
+    <button id="prev-short">Prev</button>
+    <div id="shorts-video-container"></div>
+    <button id="next-short">Next</button>
   </div>
 
   <script type="module" src="app.js"></script>
