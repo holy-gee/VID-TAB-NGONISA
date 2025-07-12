@@ -1,109 +1,144 @@
 body {
-  background: #111;
-  color: white;
   font-family: Arial, sans-serif;
+  background-color: #111;
+  color: white;
   margin: 0;
   padding: 0;
 }
 
 header {
-  background: red;
+  background-color: #c00;
   padding: 1rem;
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 
-button {
-  margin: 0.3rem;
-  padding: 0.5rem 1rem;
+header h1 {
+  margin: 0;
+  flex-grow: 1;
+}
+
+nav button {
+  margin: 0 0.3rem;
+  padding: 0.5rem;
+  background-color: #900;
+  color: white;
   border: none;
   border-radius: 4px;
-  background: #900;
-  color: white;
   cursor: pointer;
 }
 
-button:hover {
-  background: #c00;
+nav button:hover {
+  background-color: #b00;
 }
 
-#video-container {
+input, select, button {
+  padding: 0.5rem;
+  margin: 0.3rem 0;
+  border-radius: 4px;
+  border: none;
+  font-size: 1rem;
+}
+
+button {
+  background-color: #900;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #b00;
+}
+
+#upload-section, #search-section {
+  margin: 1rem;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+#videos-container {
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
   margin: 1rem;
 }
 
 .video-card {
-  width: 300px;
-  background: #222;
+  background-color: #222;
   padding: 0.5rem;
-  border-radius: 6px;
+  width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #c00;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .video-thumb {
   width: 100%;
   height: 170px;
   object-fit: cover;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
-.play-btn {
+.play-btn-overlay {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.6);
+  font-size: 40px;
   color: white;
-  border: none;
-  font-size: 2rem;
-  padding: 0.5rem 1rem;
-  border-radius: 50%;
-  cursor: pointer;
+  opacity: 0.8;
+  pointer-events: none;
 }
 
 .video-title {
   font-weight: bold;
   margin-top: 0.5rem;
+  font-size: 1.1rem;
+  color: #ff4444;
 }
 
-.video-uploader {
+.video-uploader, .video-category {
   font-size: 0.9rem;
   color: #ccc;
 }
 
-.like-btn {
+.video-controls {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.like-btn, .download-btn {
   background-color: #900;
   border: none;
   color: white;
   padding: 0.3rem 0.8rem;
   cursor: pointer;
   border-radius: 4px;
-  margin-top: 0.5rem;
+  font-size: 0.9rem;
 }
 
-.like-btn:hover {
-  background-color: #c00;
+.like-btn:hover, .download-btn:hover {
+  background-color: #b00;
 }
 
-#shorts-player {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: black;
+#shorts-viewer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 1rem;
 }
 
-#shorts-iframe {
-  width: 100%;
-  height: 80vh;
-}
-
-#shorts-player button {
-  margin-top: 10px;
+#shorts-video-container iframe {
+  width: 90vw;
+  height: 70vh;
 }
