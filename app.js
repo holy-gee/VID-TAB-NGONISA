@@ -6,7 +6,6 @@ import {
   query,
   orderBy,
   onSnapshot,
-  where,
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -23,12 +22,12 @@ const db = getFirestore(app);
 
 const videosCol = collection(db, "videos");
 
-// HTML elements
+// Elements
 const uploadForm = document.getElementById("uploadForm");
 const videoList = document.getElementById("videoList");
 const searchInput = document.getElementById("searchInput");
 
-// Upload video handler
+// Upload video
 uploadForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -57,7 +56,7 @@ uploadForm.addEventListener("submit", async (e) => {
   }
 });
 
-// Render video cards
+// Render videos like TikTok
 function renderVideos(videos) {
   videoList.innerHTML = "";
 
@@ -69,49 +68,44 @@ function renderVideos(videos) {
   videos.forEach((doc) => {
     const video = doc.data();
 
-    const card = document.createElement("div");
-    card.className = "video-card";
+    const container = document.createElement("div");
+    container.className = "tiktok-video-container";
 
-    card.innerHTML = `
-      <img src="${video.thumbnailURL}" alt="${video.title}" class="thumbnail" />
-      <h3>${video.title}</h3>
-      <video controls src="${video.videoURL}" class="video-player"></video>
+    container.innerHTML = `
+      <video src="${video.videoURL}" class="tiktok-video" controls autoplay loop></video>
+      <div class="video-overlay">
+        <h3>${video.title}</h3>
+      </div>
     `;
 
-    videoList.appendChild(card);
+    videoList.appendChild(container);
   });
 }
 
-// Listen for videos with optional search filter
+// Listen for videos (with search)
 function listenForVideos(filter = "") {
-  let q;
+  let q = query(videosCol, orderBy("timestamp", "desc"));
 
-  if (filter) {
-    // Create range for simple prefix search
-    const end = filter.replace(/.$/, (c) => String.fromCharCode(c.charCodeAt(0) + 1));
-    q = query(
-      videosCol,
-      where("title", ">=", filter),
-      where("title", "<", end),
-      orderBy("title")
-    );
-  } else {
-    q = query(videosCol, orderBy("timestamp", "desc"));
-  }
-
-  // Unsubscribe previous listener if any
   if (window.unsubscribeVideos) window.unsubscribeVideos();
 
   window.unsubscribeVideos = onSnapshot(q, (snapshot) => {
-    renderVideos(snapshot.docs);
+    let filteredDocs = snapshot.docs;
+
+    if (filter) {
+      filteredDocs = filteredDocs.filter((doc) =>
+        doc.data().title.toLowerCase().includes(filter)
+      );
+    }
+
+    renderVideos(filteredDocs);
   });
 }
 
-// Search input event listener
+// Search
 searchInput.addEventListener("input", (e) => {
   const searchTerm = e.target.value.trim().toLowerCase();
   listenForVideos(searchTerm);
 });
 
-// Initial load: listen for all videos
+// Initial load
 listenForVideos();
