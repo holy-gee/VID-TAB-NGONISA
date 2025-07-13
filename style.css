@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   font-family: 'Arial', sans-serif;
-  user-select: none;
 }
 
 body {
@@ -22,7 +21,49 @@ body {
   font-size: 18px;
   color: #ff0000;
   z-index: 9999;
-  font-family: 'Arial', sans-serif;
+}
+
+/* Upload container */
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 20px;
+}
+.upload-container input, .upload-container button {
+  padding: 10px;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+.upload-container button {
+  background-color: #ff0000;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.upload-container button:hover {
+  background-color: #cc0000;
+}
+
+/* Search container */
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+#search-input {
+  padding: 10px 15px;
+  width: 80%;
+  max-width: 500px;
+  border: none;
+  border-radius: 25px;
+  outline: none;
+  font-size: 16px;
 }
 
 /* Horizontal scroll container */
@@ -31,11 +72,8 @@ body {
   overflow-x: auto;
   gap: 15px;
   padding: 15px;
-  margin-top: 20px;
   scroll-behavior: smooth;
 }
-
-/* Hide scrollbar but still scrollable */
 .video-carousel::-webkit-scrollbar {
   height: 8px;
 }
@@ -44,113 +82,4 @@ body {
   border-radius: 4px;
 }
 .video-carousel::-webkit-scrollbar-track {
-  background: #222;
-}
-
-/* Video card */
-.video-card {
-  position: relative;
-  min-width: 280px;
-  height: 160px;
-  background: #111;
-  border-radius: 10px;
-  box-shadow: 0 0 12px #ff0000cc;
-  flex-shrink: 0;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-.video-card:hover {
-  transform: scale(1.05);
-}
-
-/* Thumbnail with background */
-.video-thumbnail {
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Play button overlay */
-.play-btn {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 48px;
-  color: #ff0000;
-  background: rgba(0, 0, 0, 0.7);
-  border: none;
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  cursor: pointer;
-  opacity: 0.85;
-  transition: opacity 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.play-btn:hover {
-  opacity: 1;
-}
-
-/* Download button bottom right */
-.download-btn {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: #ff0000;
-  border: none;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  font-size: 22px;
-  color: white;
-  cursor: pointer;
-  opacity: 0.9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  user-select: none;
-  transition: background 0.3s ease;
-  z-index: 2;
-}
-.download-btn:hover {
-  background: #cc0000;
-}
-
-/* Tooltip on hover for buttons (optional) */
-.play-btn[aria-label]:hover::after,
-.download-btn[aria-label]:hover::after {
-  content: attr(aria-label);
-  position: absolute;
-  bottom: 130%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #ff0000cc;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
-  font-size: 12px;
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.3s;
-}
-
-/* Responsive tweaks */
-@media (max-width: 600px) {
-  .video-card {
-    min-width: 220px;
-    height: 130px;
-  }
-  .play-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 32px;
-  }
-}
+  background:
