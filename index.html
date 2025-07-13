@@ -14,9 +14,18 @@
     Firebase Video Upload Guide - Dhogo Productions
   </h1>
 
+  <!-- Search container -->
+  <div class="search-container">
+    <input type="text" id="search-input" placeholder="Search videos by title...">
+  </div>
+
   <!-- Horizontal scroll container -->
-  <div class="video-carousel" id="video-carousel">
-    <!-- Video cards will be injected here dynamically -->
+  <div class="video-carousel" id="video-carousel"></div>
+
+  <!-- Modal for playing video -->
+  <div id="video-modal" class="modal">
+    <span id="close-modal" class="close">&times;</span>
+    <video id="modal-video" controls autoplay></video>
   </div>
 
   <script src="app.js"></script>
