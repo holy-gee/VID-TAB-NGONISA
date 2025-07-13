@@ -1,55 +1,156 @@
-body {
+/* Reset & base */
+* {
+  box-sizing: border-box;
   margin: 0;
-  background: black;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  user-select: none;
+}
+
+body {
+  background-color: #111;
   color: white;
-  font-family: sans-serif;
   overflow-x: hidden;
 }
 
-#uploadForm,
-#searchInput {
+/* Top right corner name */
+#top-right-name {
   position: fixed;
   top: 10px;
-  left: 10px;
-  right: 10px;
-  z-index: 10;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 10px;
+  right: 15px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #ff0000;
+  z-index: 9999;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Horizontal scroll container */
+.video-carousel {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding: 15px;
+  margin-top: 20px;
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but still scrollable */
+.video-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+.video-carousel::-webkit-scrollbar-thumb {
+  background-color: #ff0000cc;
+  border-radius: 4px;
+}
+.video-carousel::-webkit-scrollbar-track {
+  background: #222;
+}
+
+/* Video card */
+.video-card {
+  position: relative;
+  min-width: 280px;
+  height: 160px;
+  background: #111;
   border-radius: 10px;
+  box-shadow: 0 0 12px #ff0000cc;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.video-card:hover {
+  transform: scale(1.05);
 }
 
-#searchInput {
-  top: 140px;
-}
-
-#videoList {
-  margin-top: 200px; /* Space for form and search */
-}
-
-.tiktok-video-container {
+/* Thumbnail with background */
+.video-thumbnail {
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
   position: relative;
   overflow: hidden;
 }
 
-.iframe-wrapper {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-}
-
-.yt-iframe {
-  width: 100%;
-  height: 100%;
-}
-
-.video-overlay {
+/* Play button overlay */
+.play-btn {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  color: #ff0000;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.play-btn:hover {
+  opacity: 1;
+}
+
+/* Download button bottom right */
+.download-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #ff0000;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 22px;
   color: white;
-  background: rgba(0, 0, 0, 0.5);
-  padding: 5px 10px;
-  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  transition: background 0.3s ease;
+  z-index: 2;
+}
+.download-btn:hover {
+  background: #cc0000;
+}
+
+/* Tooltip on hover for buttons (optional) */
+.play-btn[aria-label]:hover::after,
+.download-btn[aria-label]:hover::after {
+  content: attr(aria-label);
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff0000cc;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .video-card {
+    min-width: 220px;
+    height: 130px;
+  }
+  .play-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 32px;
+  }
 }
